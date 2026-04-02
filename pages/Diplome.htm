@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9A4KJ - Award Gallery & Diplomas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #00ff88; --bg: #0a0a0c; --card-bg: #16161a; --text: #e0e0e6; --text-muted: #94949e; --border: rgba(255,255,255,0.08); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; line-height: 1.6; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 4rem 2rem; }
+        .back { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; margin-bottom: 3rem; transition: 0.2s; }
+        .back:hover { color: var(--primary); }
+        h1 { font-size: 3rem; font-weight: 800; color: var(--primary); margin-bottom: 1rem; }
+        .subtitle { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 4rem; }
+        .section { margin-bottom: 4rem; }
+        h2 { font-size: 1.8rem; font-weight: 700; margin-bottom: 1.5rem; border-left: 4px solid var(--primary); padding-left: 1rem; }
+        p { color: var(--text-muted); margin-bottom: 1rem; line-height: 1.8; }
+        .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+        .gallery a { display: block; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); transition: 0.3s; }
+        .gallery a:hover { border-color: var(--primary); transform: scale(1.02); }
+        .gallery img { width: 100%; display: block; height: 200px; object-fit: contain; background: #111; }
+        .gallery .caption { padding: 0.75rem 1rem; font-size: 0.85rem; color: var(--text-muted); background: var(--card-bg); }
+        .doc-link { display: inline-flex; align-items: center; gap: 0.75rem; padding: 1rem 1.5rem; background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; text-decoration: none; color: var(--text); transition: 0.3s; margin: 0.5rem 0.5rem 0.5rem 0; }
+        .doc-link:hover { border-color: var(--primary); color: var(--primary); }
+        footer { text-align: center; padding: 3rem 0; border-top: 1px solid var(--border); color: var(--text-muted); margin-top: 4rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back">&#8592; Back to 9A4KJ Home</a>
+        <h1>Award Gallery & Diplomas</h1>
+        <p class="subtitle">A comprehensive collection of contest diplomas, WPX awards, IOTA recognitions, and radio achievements.</p>
+
+        <div class="section">
+            <h2>WPX Contest Awards</h2>
+            <p>CW WPX Contest awards from IOTA expeditions to island Rab in 2015 and 2016.</p>
+            <a href="Diplome/Rab15wpx.pdf" class="doc-link">&#127942; WPX Diploma 2015 (PDF)</a>
+            <a href="Diplome/Rab16wpx.pdf" class="doc-link">&#127942; WPX Diploma 2016 (PDF)</a>
+        </div>
+
+        <div class="section">
+            <h2>Contest Diplomas</h2>
+            <div class="gallery">
+                <a href="Diplome/IOTA SWL 2010.JPG" target="_blank"><img src="Diplome/IOTA SWL 2010.JPG" alt="IOTA SWL 2010"><div class="caption">IOTA SWL 2010</div></a>
+                <a href="Diplome/IOTA_SWL_2010.JPG" target="_blank"><img src="Diplome/IOTA_SWL_2010.JPG" alt="IOTA SWL"><div class="caption">IOTA SWL Certificate</div></a>
+                <a href="Diplome/RUDX SWL 2012.JPG" target="_blank"><img src="Diplome/RUDX SWL 2012.JPG" alt="RUDX SWL 2012"><div class="caption">RUDX SWL 2012</div></a>
+                <a href="Diplome/VERON 2012.JPG" target="_blank"><img src="Diplome/VERON 2012.JPG" alt="VERON 2012"><div class="caption">VERON Award 2012</div></a>
+                <a href="Diplome/dxcert1.JPG" target="_blank"><img src="Diplome/dxcert1.JPG" alt="DX Certificate"><div class="caption">DX Certificate</div></a>
+                <a href="Diplome/ARI18.png" target="_blank"><img src="Diplome/ARI18.png" alt="ARI 2018"><div class="caption">ARI Contest 2018</div></a>
+                <a href="Diplome/SMRssb19.jpg" target="_blank"><img src="Diplome/SMRssb19.jpg" alt="SMR SSB 2019"><div class="caption">SMR SSB 2019</div></a>
+                <a href="Diplome/iota2019.jpg" target="_blank"><img src="Diplome/iota2019.jpg" alt="IOTA 2019"><div class="caption">IOTA 2019</div></a>
+                <a href="Diplome/iota2025.pdf" target="_blank"><img src="Diplome/iota2025.pdf" alt="IOTA 2025"><div class="caption">IOTA 2025</div></a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>QSL Cards</h2>
+            <p>QSL cards collected from radio contacts worldwide.</p>
+            <div class="gallery">
+                <a href="QSL/QSL9a1rab.jpg" target="_blank"><img src="QSL/QSL9a1rab.jpg" alt="QSL 9A1RAB"><div class="caption">QSL Card - 9A1RAB Rab</div></a>
+            </div>
+        </div>
+    </div>
+    <footer>73 de 9A4KJ | <a href="index.html" style="color:var(--primary);text-decoration:none;">Return Home</a></footer>
+</body>
+</html>

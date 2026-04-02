@@ -1,0 +1,78 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="hr">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Primjer 3</title>
+</head>
+
+<body>
+
+<p>Primjer 3 : Koji Port ?</p>
+<p>// Svakom portu na računalu dodjeljuje njegovu stvarnu adresu</p>
+<p># include &lt;stdio.h><br>
+# include &lt;dos.h><br>
+void main(void)<br>
+{<br>
+	int n,m=0,adresa;<br>
+	for(n=0;n&lt;4;n++)<br>
+	{<br>
+		adresa=peek(0x40,m);<br>
+		if (adresa==0)<br>
+		printf("Nisam pronaçao COM%d \n",n+1);<br>
+		else<br>
+		printf ("Adresa vrata COM%d=%x \n",n+1,adresa);<br>
+<br>
+		m=m+2;<br>
+	}<br>
+}<br>
+</p>
+<p>Primjer 4: Port 1</p>
+<p>// Ovaj program upravlja komunikacijskim serijskim vratima bez prekidnih rutina<br>
+<br>
+# include &lt;dos.h><br>
+# include &lt;conio.h><br>
+# include &lt;stdio.h><br>
+# define vrata 0x3f8<br>
+<br>
+void setup (void)<br>
+{<br>
+	outportb (vrata+1,0);			// iskljuci prekide<br>
+	outportb (vrata+3,0x80);		// 7 bit LCR-a = 1 omoguci postavljanje djeljitelja<br>
+	outportb (vrata+0,0x0c);		// brzina prijenosa 9600 bps postavlja donji bajt<br>
+	outportb (vrata+1,0x00);		// brzina prijenosa 9600 bps postavlja gornji bajt<br>
+	outportb (vrata+3,0x03);		// postavljam parametre prijenosa 8N1<br>
+	outportb (vrata+2,0xC7);		// FIFO registar<br>
+}<br>
+<br>
+void main (void)<br>
+{<br>
+	int c ;<br>
+	char ch;<br>
+	setup();<br>
+	printf("Jednostavan program u jeziku C za serijsku komunikaciju \n");<br>
+	printf("Pritisni ESC za kraj ... \n\n");<br>
+<br>
+	do<br>
+	{<br>
+		c=inportb(vrata+5);		//LSR Da li je pristigao kakav znak? Bit0=1 Da<br>
+		if (c&amp;1)			// Ako je primljen znak...<br>
+		{<br>
+			ch=inportb(vrata);	//Procitaj znak...<br>
+			printf("%c",ch);	//...pa ga ispisi na zaslon<br>
+		}<br>
+		if (kbhit())			//Ako je pritisnuta tipka na tipkovnici...<br>
+		{<br>
+			ch=getch();		// ...primi taj znak...<br>
+                        outportb(vrata,ch);	// ...i posalji na serijska vrata...<br>
+		}<br>
+	}<br>
+	while (ch!=27);				//... dok promjenljiva ch nije 27 tj.ESC<br>
+} <br>
+</p>
+
+</body>
+
+</html>

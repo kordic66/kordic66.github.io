@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9A4KJ - Electronics Projects</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #00ff88; --bg: #0a0a0c; --card-bg: #16161a; --text: #e0e0e6; --text-muted: #94949e; --border: rgba(255,255,255,0.08); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; line-height: 1.6; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 4rem 2rem; }
+        .back { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; margin-bottom: 3rem; transition: 0.2s; }
+        .back:hover { color: var(--primary); }
+        h1 { font-size: 3rem; font-weight: 800; color: var(--primary); margin-bottom: 1rem; }
+        .subtitle { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 4rem; }
+        .section { margin-bottom: 4rem; }
+        h2 { font-size: 1.8rem; font-weight: 700; margin-bottom: 1.5rem; border-left: 4px solid var(--primary); padding-left: 1rem; }
+        p { color: var(--text-muted); margin-bottom: 1rem; line-height: 1.8; }
+        .spec-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem 2rem; margin: 1rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: var(--primary); }
+        .spec-box span { color: var(--text-muted); }
+        .doc-link { display: inline-flex; align-items: center; gap: 0.75rem; padding: 1rem 1.5rem; background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; text-decoration: none; color: var(--text); transition: 0.3s; margin: 0.5rem 0.5rem 0.5rem 0; }
+        .doc-link:hover { border-color: var(--primary); color: var(--primary); }
+        footer { text-align: center; padding: 3rem 0; border-top: 1px solid var(--border); color: var(--text-muted); margin-top: 4rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back">&#8592; Back to 9A4KJ Home</a>
+        <h1>Electronics Projects</h1>
+        <p class="subtitle">Custom hardware builds for amateur radio: SWR meters, keyers, interfaces, and power systems.</p>
+
+        <div class="section">
+            <h2>SWR & Power Meter</h2>
+            <p>A custom-built SWR and forward/reflected power meter for HF radio use. Displays real-time SWR values and helps tune antennas and amplifiers precisely.</p>
+            <a href="Swr.htm" class="doc-link">&#128200; View SWR Meter Details</a>
+        </div>
+
+        <div class="section">
+            <h2>IF10C - Interface for Kenwood Radios</h2>
+            <p>A custom computer interface designed for Kenwood transceivers. Provides CAT control, CW keying, and PTT functions over a single USB or serial connection, enabling full software-controlled operation.</p>
+            <a href="IF10C.htm" class="doc-link">&#128279; View IF10C Interface Details</a>
+        </div>
+
+        <div class="section">
+            <h2>DDS Controller with PIC 16F628</h2>
+            <p>A Direct Digital Synthesis (DDS) VFO controller based on the Microchip PIC 16F628 microcontroller. Enables precise frequency generation for receiver and transmitter projects with digital accuracy.</p>
+            <div class="spec-box">
+                MCU: <span>PIC 16F628</span><br>
+                Type: <span>DDS VFO Controller</span><br>
+                Interface: <span>Rotary encoder + LCD display</span>
+            </div>
+            <a href="ddscon.htm" class="doc-link">&#128296; View DDS Controller Details</a>
+        </div>
+
+        <div class="section">
+            <h2>Arduino Automation Projects</h2>
+            <p>A range of Arduino-based automation systems for the shack, including band decoders, antenna switching logic, and remote control interfaces.</p>
+            <a href="Arduino.htm" class="doc-link">&#128279; View Arduino Lab</a>
+        </div>
+    </div>
+    <footer>73 de 9A4KJ | <a href="index.html" style="color:var(--primary);text-decoration:none;">Return Home</a></footer>
+</body>
+</html>

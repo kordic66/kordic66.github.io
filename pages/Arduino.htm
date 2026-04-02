@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9A4KJ - Arduino Lab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --primary: #00ff88; 
+            --bg: #0a0a0c; 
+            --card-bg: #16161a; 
+            --text: #e0e0e6; 
+            --text-muted: #94949e; 
+            --border: rgba(255,255,255,0.08); 
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background: var(--bg); 
+            color: var(--text); 
+            font-family: 'Inter', sans-serif; 
+            line-height: 1.6; 
+        }
+        .container { 
+            max-width: 1100px; 
+            margin: 0 auto; 
+            padding: 4rem 2rem; 
+        }
+        .back { 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 0.5rem; 
+            color: var(--text-muted); 
+            text-decoration: none; 
+            font-size: 0.9rem; 
+            margin-bottom: 3rem; 
+            transition: 0.2s; 
+        }
+        .back:hover { color: var(--primary); }
+        h1 { 
+            font-size: 3rem; 
+            font-weight: 800; 
+            color: var(--primary); 
+            margin-bottom: 1rem; 
+        }
+        .subtitle { 
+            color: var(--text-muted); 
+            font-size: 1.1rem; 
+            margin-bottom: 4rem; 
+        }
+        .section { 
+            margin-bottom: 4rem; 
+        }
+        h2 { 
+            font-size: 1.8rem; 
+            font-weight: 700; 
+            margin-bottom: 1.5rem; 
+            border-left: 4px solid var(--primary); 
+            padding-left: 1rem; 
+        }
+        p { 
+            color: var(--text-muted); 
+            margin-bottom: 1rem; 
+            line-height: 1.8; 
+        }
+        .code-block { 
+            background: #111; 
+            border: 1px solid var(--border); 
+            border-radius: 12px; 
+            padding: 1.5rem 2rem; 
+            margin: 1rem 0; 
+            font-family: 'JetBrains Mono', monospace; 
+            font-size: 0.85rem; 
+            color: #a8e6cf; 
+            overflow-x: auto; 
+            white-space: pre; 
+        }
+        .spec-box { 
+            background: var(--card-bg); 
+            border: 1px solid var(--border); 
+            border-radius: 12px; 
+            padding: 1.5rem 2rem; 
+            margin: 1rem 0; 
+            font-family: 'JetBrains Mono', monospace; 
+            font-size: 0.9rem; 
+            color: var(--primary); 
+        }
+        .spec-box span { color: var(--text-muted); }
+        .tag { 
+            display: inline-block; 
+            background: rgba(0,255,136,0.1); 
+            color: var(--primary); 
+            border: 1px solid rgba(0,255,136,0.3); 
+            border-radius: 6px; 
+            padding: 0.25rem 0.75rem; 
+            font-size: 0.8rem; 
+            font-weight: 600; 
+            margin: 0.25rem; 
+        }
+        .old-content {
+            background: #1f1f24;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.8rem;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 8px 4px;
+        }
+        footer { 
+            text-align: center; 
+            padding: 3rem 0; 
+            border-top: 1px solid var(--border); 
+            color: var(--text-muted); 
+            margin-top: 4rem; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back">← Back to 9A4KJ Home</a>
+        <h1>Arduino Lab</h1>
+        <p class="subtitle">Microcontroller solutions for automation, DDS control, and radio equipment management.</p>
+
+        <!-- Postojeće sekcije -->
+        <div class="section">
+            <h2>Arduino UNO DDS VFO</h2>
+            <p>A Variable Frequency Oscillator (VFO) implementation on the Arduino UNO platform, using the AD9850 DDS module. Provides stable, accurate frequency generation for HF receivers and transmitters with a smooth rotary encoder interface.</p>
+            <div class="spec-box">
+                Platform: <span>Arduino UNO (ATmega328P)</span><br>
+                DDS Module: <span>AD9850 / AD9851</span><br>
+                Frequency Range: <span>1 Hz - 30 MHz</span><br>
+                Output: <span>Sine wave, TTL clock</span>
+            </div>
+            <div>
+                <span class="tag">C++</span>
+                <span class="tag">Arduino IDE</span>
+                <span class="tag">SPI</span>
+                <span class="tag">AD9850</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Band Decoder & Antenna Switcher</h2>
+            <p>An Arduino-based band decoder that reads BCD band data from the transceiver and automatically switches the antenna relay matrix to the correct antenna for each band. Compatible with Kenwood, Yaesu, and Icom radios.</p>
+            <div class="spec-box">
+                Inputs: <span>BCD band lines from transceiver</span><br>
+                Outputs: <span>8 relay outputs for antenna matrix</span><br>
+                Delay: <span>&lt; 5ms switching time</span>
+            </div>
+            <div>
+                <span class="tag">C++</span>
+                <span class="tag">Arduino</span>
+                <span class="tag">Relay control</span>
+                <span class="tag">BCD decode</span>
+            </div>
+        </div>
+
+        <!-- Umetnuta sekcija - nanoKeyer -->
+        <div class="section">
+            <h2>Morse Code Keyer - nanoKeyer</h2>
+            <p><strong>Electronic iambic keyer with Arduino Nano</strong> based on software from Oscar (DJ0MY). Fully functional, tested and still working after long time of use.</p>
+            
+            <div class="spec-box">
+                Platform: <span>Arduino Nano</span><br>
+                Type: <span>Iambic Electronic Keyer</span><br>
+                Features: <span>Speed control, sidetone, memories (depending on version)</span><br>
+                Software: <span>Oscar DJ0MY original firmware</span>
+            </div>
+
+            <div>
+                <span class="tag">C++</span>
+                <span class="tag">Arduino Nano</span>
+                <span class="tag">CW Keyer</span>
+                <span class="tag">Iambic</span>
+                <span class="tag">Tested &amp; Working</span>
+            </div>
+
+            <div class="old-content">
+                <p><strong>Original description:</strong></p>
+                <p>I made two of these electronic keyers and tested them. Still working. The software is made in Arduino (from Oscar, DJ0MY).</p>
+                
+                <p><strong>Photos:</strong></p>
+                <p>
+                    <a href="nanoKeyer/nano1.JPG"><img src="nanoKeyer/nano1.JPG" width="80" height="80" alt="nanoKeyer 1"></a>
+                    <a href="nanoKeyer/nano2.JPG"><img src="nanoKeyer/nano2.JPG" width="80" height="80" alt="nanoKeyer 2"></a>
+                    <a href="nanoKeyer/nano3.JPG"><img src="nanoKeyer/nano3.JPG" width="80" height="80" alt="nanoKeyer 3"></a>
+                    <a href="nanoKeyer/nano4.JPG"><img src="nanoKeyer/nano4.JPG" width="80" height="80" alt="nanoKeyer 4"></a>
+                    <a href="nanoKeyer/nano5.png"><img src="nanoKeyer/nano5.png" width="80" height="80" alt="nanoKeyer 5"></a>
+                    <a href="nanoKeyer/nano6.png"><img src="nanoKeyer/nano6.png" width="80" height="80" alt="nanoKeyer 6"></a>
+                </p>
+
+                <p><strong>Documentation:</strong><br>
+                <a href="https://kordic66.github.io/nanoKeyer/nanoKeyer.docx" target="_blank" style="color:var(--primary);">→ Electronic keyer with Arduino nano (Word document)</a>
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>73 de 9A4KJ | <a href="index.html" style="color:var(--primary);text-decoration:none;">Return Home</a></footer>
+</body>
+</html>

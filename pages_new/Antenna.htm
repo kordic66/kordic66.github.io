@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>9A4KJ — Antenna Workshop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600,700&display=swap" rel="stylesheet">
+  <!-- Apply saved theme BEFORE render to prevent flash -->
+  <script>
+    (function(){var t=localStorage.getItem('9a4kj-theme');if(t)document.documentElement.setAttribute('data-theme',t);})();
+  </script>
+  <style>
+    :root {
+      --primary: #00ff88; --primary-dim: rgba(0,255,136,0.10);
+      --bg: #0a0a0c; --surface: #111114; --card-bg: #16161a;
+      --text: #e0e0e6; --text-muted: #7a7a88; --text-faint: #44444e;
+      --border: rgba(255,255,255,0.07); --border-hover: rgba(0,255,136,0.4);
+      --radius: 10px;
+      --font-body: 'Satoshi','Helvetica Neue',sans-serif;
+      --font-mono: 'JetBrains Mono','Courier New',monospace;
+    }
+    [data-theme="light"] {
+      --primary: #007a40; --primary-dim: rgba(0,122,64,0.10);
+      --bg: #f2f2ee; --surface: #fff; --card-bg: #fff;
+      --text: #1a1a20; --text-muted: #5a5a68; --text-faint: #a0a0aa;
+      --border: rgba(0,0,0,0.09); --border-hover: rgba(0,122,64,0.4);
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: var(--font-body); line-height: 1.65;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; height: auto; }
+
+    .page-container { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+
+    .page-hero { margin-bottom: 3.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+    .page-hero h1 {
+      font-family: var(--font-mono); font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700; color: var(--primary); line-height: 1.1; margin-bottom: 0.75rem;
+      text-shadow: 0 0 40px rgba(0,255,136,0.2);
+    }
+    [data-theme="light"] .page-hero h1 { text-shadow: none; }
+    .page-hero .subtitle { color: var(--text-muted); font-size: 1rem; max-width: 60ch; }
+
+    .page-section { margin-bottom: 3.5rem; }
+    .page-section h2 {
+      font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem;
+      padding-left: 1rem; border-left: 3px solid var(--primary);
+      line-height: 1.3;
+    }
+    .page-section p { color: var(--text-muted); margin-bottom: 0.85rem; line-height: 1.75; max-width: 72ch; }
+    .page-section p:last-child { margin-bottom: 0; }
+
+    .doc-link {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      color: var(--primary); font-size: 0.9rem; margin: 0.5rem 0 1rem;
+      border: 1px solid var(--border-hover); border-radius: var(--radius);
+      padding: 0.5rem 1rem; transition: background 0.2s, border-color 0.2s;
+    }
+    .doc-link:hover { background: var(--primary-dim); }
+
+    .photo-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem; margin-top: 1.25rem;
+    }
+    .photo-grid a {
+      display: block; border-radius: var(--radius); overflow: hidden;
+      border: 1px solid var(--border); transition: border-color 0.2s, transform 0.25s;
+    }
+    .photo-grid a:hover { border-color: var(--primary); transform: scale(1.02); }
+    .photo-grid img { width:100%; height: 180px; object-fit: cover; display:block; }
+    .photo-caption { padding: 0.5rem 0.75rem; font-size: 0.8rem; color: var(--text-muted); background: var(--card-bg); }
+
+    .thumb-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem; }
+    .thumb-row a { border-radius: 8px; overflow: hidden; border: 1px solid var(--border); transition: border-color 0.2s; }
+    .thumb-row a:hover { border-color: var(--primary); }
+    .thumb-row img { width: 90px; height: 90px; object-fit: cover; display: block; }
+
+    .link-list { list-style: none; margin-top: 1rem; }
+    .link-list li { margin-bottom: 0.6rem; }
+    .link-list a {
+      color: var(--primary); font-size: 0.95rem;
+      transition: opacity 0.2s; display: inline-flex; align-items: center; gap: 0.4rem;
+    }
+    .link-list a:hover { opacity: 0.75; }
+    .link-list a::before { content: '→'; font-size: 0.8rem; }
+
+    .page-footer {
+      margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border);
+      text-align: center; color: var(--text-faint);
+      font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.05em;
+    }
+    .page-footer a { color: var(--primary); }
+    .page-footer a:hover { opacity: 0.75; }
+
+    @media (max-width: 600px) {
+      .page-container { padding: 2rem 1.25rem 4rem; }
+      .photo-grid { grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); }
+    }
+    
+  </style>
+</head>
+<body>
+  <!-- theme.js injects the nav automatically -->
+  <script src="theme.js"></script>
+
+  <main class="page-container">
+    <div class="page-hero">
+      <h1>Antenna Workshop</h1>
+      <p class="subtitle">Custom antenna designs and field builds for IOTA expeditions and home station operations.</p>
+    </div>
+
+    <div class="page-section">
+      <h2>Low Cost GPINV Antenna (10m, 15m, 20m)</h2>
+      <p>A budget-friendly multi-band inverted ground plane antenna covering the 10m, 15m, and 20m bands. Designed and field-tested for the WAE and SAC CW Contests at 9A1RAB on the island of Rab. Achieves SWR of 1:1.5 to 1:2 across all three bands.</p>
+      <div class="photo-grid">
+        <a href="Ljeto2015/GPant1.JPG" target="_blank"><img src="Ljeto2015/GPant1.JPG" alt="GPINV Antenna 1"><div class="photo-caption">GPINV Antenna assembly</div></a>
+        <a href="Ljeto2015/GPant2.JPG" target="_blank"><img src="Ljeto2015/GPant2.JPG" alt="GPINV Antenna 2"><div class="photo-caption">Field installation</div></a>
+      </div>
+    </div>
+
+    <div class="page-section">
+      <h2>EH Antenna for 20m</h2>
+      <p>An experimental EH (Electric-Hertzian) antenna designed for the 20-meter band. Known for its compact size while delivering good performance, tested across various field conditions.</p>
+      <div class="photo-grid">
+        <a href="Antena/ehant2.JPG" target="_blank"><img src="Antena/ehant2.JPG" alt="EH Antenna"><div class="photo-caption">EH Antenna — 20m band</div></a>
+        <a href="Antena/Loop_Rab_7.JPG" target="_blank"><img src="Antena/Loop_Rab_7.JPG" alt="Loop Antenna"><div class="photo-caption">Loop antenna — island of Rab</div></a>
+      </div>
+    </div>
+
+    <div class="page-section">
+      <h2>Spider Beam (Homemade) — IOTA 2014 &amp; 2018</h2>
+      <p>A fully homemade Spider Beam antenna built from locally sourced materials for IOTA activations on island Rab in 2014 and 2018. Offers good directional gain across multiple HF bands without needing a heavy tower.</p>
+    </div>
+
+    <div class="page-section">
+      <h2>BALUN 1:1 for Spider Beam</h2>
+      <p>A custom-wound 1:1 BALUN built to match the feedline to the Spider Beam antenna. Constructed in a weatherproof enclosure for outdoor DX expeditions.</p>
+      <div class="photo-grid">
+        <a href="BALUN/BALUN 1.jpg" target="_blank"><img src="BALUN/BALUN 1.jpg" alt="BALUN"><div class="photo-caption">BALUN wound on ferrite core</div></a>
+        <a href="BALUN/BALUN in Box 7.jpg" target="_blank"><img src="BALUN/BALUN in Box 7.jpg" alt="BALUN in box"><div class="photo-caption">BALUN in weatherproof box</div></a>
+        <a href="BALUN/Start.jpg" target="_blank"><img src="BALUN/Start.jpg" alt="BALUN build start"><div class="photo-caption">Build process</div></a>
+      </div>
+    </div>
+
+    <footer class="page-footer">
+      <p>73 de 9A4KJ &mdash; <a href="index.html">Return Home</a></p>
+    </footer>
+  </main>
+</body>
+</html>
