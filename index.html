@@ -1,377 +1,931 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>kintsukuroi — Photography</title>
-  <meta name="description" content="Photography portfolio — capturing light, shadow, and the quiet moments between.">
-  <meta property="og:title" content="kintsukuroi — Photography">
-  <meta property="og:description" content="Photography portfolio — capturing light, shadow, and the quiet moments between.">
-  <meta property="og:type" content="website">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9A4KJ - Amateur Radio & Hardware Engineering</title>
+    <meta name="description" content="9A4KJ — Davor Kordic, amateur radio station and electrical engineer from Croatia. SDR experiments, antenna builds, Arduino projects and more.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600,700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== TOKENS ===== */
+        :root {
+            --primary: #00ff88;
+            --primary-dim: rgba(0, 255, 136, 0.12);
+            --primary-glow: rgba(0, 255, 136, 0.25);
+            --bg: #0a0a0c;
+            --surface: #111114;
+            --card-bg: #16161a;
+            --card-hover: #1c1c22;
+            --text: #e0e0e6;
+            --text-muted: #7a7a88;
+            --text-faint: #44444e;
+            --border: rgba(255,255,255,0.07);
+            --border-hover: rgba(0,255,136,0.4);
+            --radius: 12px;
+            --transition: 220ms cubic-bezier(0.16, 1, 0.3, 1);
+            --font-body: 'Satoshi', 'Helvetica Neue', sans-serif;
+            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+        }
 
-  <!-- Fonts: Cormorant Garamond (display) + Switzer (body) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
-  <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500&display=swap" rel="stylesheet">
+        [data-theme="light"] {
+            --primary: #007a40;
+            --primary-dim: rgba(0, 122, 64, 0.10);
+            --primary-glow: rgba(0, 122, 64, 0.20);
+            --bg: #f5f5f0;
+            --surface: #ffffff;
+            --card-bg: #ffffff;
+            --card-hover: #f0f0eb;
+            --text: #1a1a20;
+            --text-muted: #5a5a68;
+            --text-faint: #a0a0aa;
+            --border: rgba(0,0,0,0.08);
+            --border-hover: rgba(0, 122, 64, 0.4);
+        }
 
-  <link rel="stylesheet" href="style.css">
+        /* ===== RESET ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 70px; -webkit-font-smoothing: antialiased; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font-body);
+            line-height: 1.65;
+            overflow-x: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        img { display: block; max-width: 100%; }
+
+        /* ===== PARTICLE CANVAS ===== */
+        #particle-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.35;
+        }
+        [data-theme="light"] #particle-canvas { opacity: 0.12; }
+
+        /* ===== NAV ===== */
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 200;
+            background: color-mix(in srgb, var(--bg) 80%, transparent);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+            transition: background 0.3s ease;
+        }
+
+        .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-brand {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 0.05em;
+            margin-right: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            transition: color var(--transition);
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px; left: 0; right: 0;
+            height: 1px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transition: transform var(--transition);
+        }
+        .nav-links a:hover { color: var(--text); }
+        .nav-links a:hover::after { transform: scaleX(1); }
+
+        /* Lang toggle */
+        .lang-toggle {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 4px 10px;
+            cursor: pointer;
+            transition: color var(--transition), border-color var(--transition);
+        }
+        .lang-toggle:hover { color: var(--primary); border-color: var(--border-hover); }
+
+        /* Theme toggle */
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-muted);
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            transition: color var(--transition);
+        }
+        .theme-toggle:hover { color: var(--primary); }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+        .hamburger span {
+            display: block;
+            width: 22px;
+            height: 1.5px;
+            background: var(--text);
+            transition: transform 0.25s ease, opacity 0.25s ease;
+        }
+        .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+        /* Mobile nav */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            inset: 60px 0 0 0;
+            background: color-mix(in srgb, var(--bg) 97%, transparent);
+            backdrop-filter: blur(20px);
+            z-index: 150;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+        }
+        .mobile-nav.open { display: flex; }
+        .mobile-nav a {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: color var(--transition);
+        }
+        .mobile-nav a:hover { color: var(--primary); }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            padding: 80px 2rem 4rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 70% 60% at 50% 40%, var(--primary-dim), transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.2s var(--ease-out, cubic-bezier(0.16,1,0.3,1)) forwards;
+        }
+
+        .hero-callsign {
+            font-family: var(--font-mono);
+            font-size: clamp(5rem, 15vw, 10rem);
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: -0.03em;
+            line-height: 1;
+            text-shadow: 0 0 60px var(--primary-glow);
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.4s cubic-bezier(0.16,1,0.3,1) forwards;
+        }
+
+        .hero-name {
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            color: var(--text-muted);
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.55s cubic-bezier(0.16,1,0.3,1) forwards;
+        }
+
+        .hero-tagline {
+            font-size: clamp(0.85rem, 2vw, 1rem);
+            color: var(--text-faint);
+            font-family: var(--font-mono);
+            letter-spacing: 0.08em;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.7s cubic-bezier(0.16,1,0.3,1) forwards;
+        }
+
+        .visitor-badge {
+            margin-top: 2rem;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.85s cubic-bezier(0.16,1,0.3,1) forwards;
+        }
+
+        .scroll-cue {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-faint);
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-family: var(--font-mono);
+            animation: scrollBob 2s ease-in-out infinite;
+        }
+        .scroll-cue::after {
+            content: '';
+            display: block;
+            width: 1px;
+            height: 36px;
+            background: linear-gradient(to bottom, var(--text-faint), transparent);
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes scrollBob {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50%       { transform: translateX(-50%) translateY(6px); }
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        section {
+            padding: clamp(4rem, 8vw, 7rem) 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+        }
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+        }
+
+        h2 {
+            font-size: clamp(1.6rem, 4vw, 2.2rem);
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+            line-height: 1.15;
+        }
+
+        .section-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            max-width: 55ch;
+            margin-bottom: 3rem;
+        }
+
+        /* ===== GRID & CARDS ===== */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+            transition: transform var(--transition), border-color var(--transition), background var(--transition), box-shadow var(--transition);
+        }
+
+        /* Gradient accent line on left edge */
+        .card::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--primary), transparent);
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+            border-radius: 3px 0 0 3px;
+        }
+
+        /* Arrow reveal on hover */
+        .card-arrow {
+            position: absolute;
+            bottom: 1.25rem;
+            right: 1.25rem;
+            font-size: 1.1rem;
+            color: var(--primary);
+            opacity: 0;
+            transform: translate(-4px, 4px);
+            transition: opacity var(--transition), transform var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-hover);
+            background: var(--card-hover);
+            box-shadow: 0 12px 36px rgba(0,0,0,0.35), 0 0 0 1px var(--border-hover);
+        }
+        .card:hover::before { transform: scaleY(1); }
+        .card:hover .card-arrow { opacity: 1; transform: translate(0, 0); }
+
+        .card-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .card h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text);
+            line-height: 1.3;
+        }
+
+        .card p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ===== ABOUT / STATS ===== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .about-text p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            max-width: 52ch;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.25rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: var(--font-mono);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+            margin-top: 0.25rem;
+        }
+
+        /* ===== DIVIDER ===== */
+        .divider {
+            height: 1px;
+            background: var(--border);
+            margin: 0;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            padding: 3rem 0;
+            text-align: center;
+            color: var(--text-faint);
+            font-size: 0.8rem;
+            font-family: var(--font-mono);
+            letter-spacing: 0.05em;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer p + p { margin-top: 0.4rem; }
+        .footer a { color: var(--primary); transition: opacity var(--transition); }
+        .footer a:hover { opacity: 0.7; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .nav-links, .lang-toggle, .theme-toggle { display: none; }
+            .hamburger { display: flex; }
+            .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .stats { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            .stats { grid-template-columns: 1fr 1fr; }
+            .hero-callsign { font-size: clamp(4rem, 20vw, 6rem); }
+        }
+
+        /* ===== SCROLL-DRIVEN REVEAL FALLBACK ===== */
+        @supports (animation-timeline: scroll()) {
+            section {
+                opacity: 0;
+                animation: sectionReveal linear both;
+                animation-timeline: view();
+                animation-range: entry 0% entry 60%;
+            }
+            section.visible { /* override */ }
+            @keyframes sectionReveal {
+                from { opacity: 0; }
+                to   { opacity: 1; }
+            }
+        }
+
+        /* Lang hidden */
+        [data-lang-target]:not(.lang-active) { display: none; }
+    </style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header class="header" id="header">
-    <nav class="nav-inner">
-      <a href="#" class="logo" aria-label="kintsukuroi photography">
-        <svg viewBox="0 0 120 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="120" height="36">
-          <!-- K -->
-          <line x1="8" y1="6" x2="8" y2="30" stroke="currentColor" stroke-width="1.2"/>
-          <line x1="8" y1="18" x2="18" y2="6" stroke="currentColor" stroke-width="1.2"/>
-          <line x1="8" y1="18" x2="18" y2="30" stroke="currentColor" stroke-width="1.2"/>
-          <!-- Crack / kintsugi element — gold vein -->
-          <path d="M24 30 L29 20 L26 14 L32 6" stroke="#b89a5a" stroke-width="0.8" stroke-linecap="round"/>
-          <!-- dot accent -->
-          <circle cx="32" cy="5.5" r="1.5" fill="#b89a5a"/>
-        </svg>
-      </a>
+<!-- Particle canvas -->
+<canvas id="particle-canvas"></canvas>
 
-      <div class="nav-links">
-        <a href="#gallery" class="nav-link">Work</a>
-        <a href="#about" class="nav-link">About</a>
-        <a href="#contact" class="nav-link">Contact</a>
-      </div>
-
-      <button class="theme-toggle" data-theme-toggle aria-label="Switch to light mode">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-        </svg>
-      </button>
-
-      <!-- Mobile hamburger -->
-      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
-        <span></span><span></span>
-      </button>
-    </nav>
-
-    <!-- Mobile nav drawer -->
-    <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
-      <a href="#gallery" class="mobile-nav-link">Work</a>
-      <a href="#about" class="mobile-nav-link">About</a>
-      <a href="#contact" class="mobile-nav-link">Contact</a>
+<!-- NAV -->
+<nav class="nav">
+    <div class="nav-inner">
+        <span class="nav-brand">9A4KJ</span>
+        <div class="nav-links">
+            <a href="#projects">
+                <span data-lang-target="en" class="lang-active">Projects</span>
+                <span data-lang-target="hr">Projekti</span>
+            </a>
+            <a href="#archives">
+                <span data-lang-target="en" class="lang-active">Archives</span>
+                <span data-lang-target="hr">Arhiv</span>
+            </a>
+            <a href="#teorija">
+                <span data-lang-target="en" class="lang-active">Theory</span>
+                <span data-lang-target="hr">Teorija</span>
+            </a>
+            <a href="#about">
+                <span data-lang-target="en" class="lang-active">About</span>
+                <span data-lang-target="hr">O meni</span>
+            </a>
+        </div>
+        <button class="lang-toggle" id="lang-toggle">HR</button>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
     </div>
-  </header>
+</nav>
 
-  <!-- HERO -->
-  <section class="hero" id="hero">
-    <div class="hero-content">
-      <p class="hero-label fade-in">Photography</p>
-      <h1 class="hero-title fade-in">
-        <em>kintsugi</em><br>
-        <span>through the lens</span>
-      </h1>
-      <p class="hero-sub fade-in">The art of finding beauty in the broken, the half-lit, and the in-between.</p>
-      <a href="#gallery" class="hero-cta fade-in">View the work</a>
+<!-- Mobile nav -->
+<div class="mobile-nav" id="mobile-nav">
+    <a href="#projects" class="mobile-nav-link">Projects</a>
+    <a href="#archives" class="mobile-nav-link">Archives</a>
+    <a href="#teorija" class="mobile-nav-link">Theory</a>
+    <a href="#about" class="mobile-nav-link">About</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+    <div class="hero-label">Amateur Radio Station</div>
+    <div class="hero-callsign">9A4KJ</div>
+    <div class="hero-name">Davor Kordic — Electrical Engineer & Radioamateur</div>
+    <div class="hero-tagline">// SDR · Antennas · Arduino · Hardware</div>
+    <div class="visitor-badge">
+        <img src="https://visitor-badge.laobi.icu/badge?page_id=kordic66.kordic66.github.io" alt="Visitor count" height="20">
     </div>
-    <div class="hero-scroll-hint" aria-hidden="true">
-      <span>scroll</span>
-      <div class="scroll-line"></div>
-    </div>
-  </section>
+    <div class="scroll-cue">scroll</div>
+</section>
 
-  <!-- GALLERY -->
-  <section class="gallery-section" id="gallery">
-    <div class="gallery-header">
-      <h2 class="section-title">Selected Work</h2>
-      <p class="section-sub">24 photographs — Maribor & beyond</p>
-    </div>
+<div class="divider"></div>
 
-    <div class="masonry-grid" id="masonry-grid">
-
-      <div class="photo-item" data-index="0" tabindex="0" role="button" aria-label="Open photo: Kint Sugi">
-        <div class="photo-wrap">
-          <img src="https://raw.githubusercontent.com/kintsukuroi814/portfolio/main/Kint%20Sugi.jpg" alt="Kint Sugi" loading="lazy">
-          <div class="photo-overlay">
-            <span class="photo-title">Kint Sugi</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="photo-item" data-index="1" tabindex="0" role="button" aria-label="Open photo: Illuminate">
-        <div class="photo-wrap">
-          <img src="https://raw.githubusercontent.com/kintsukuroi814/portfolio/main/Illuminate.jpg" alt="Illuminate" loading="lazy">
-          <div class="photo-overlay">
-            <span class="photo-title">Illuminate</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="photo-item" data-index="2" tabindex="0" role="button" aria-label="Open photo: Dark Corners">
-        <div class="photo-wrap">
-          <img src="https://raw.githubusercontent.com/kintsukuroi814/portfolio/main/Dark%20corners.jpg" alt="Dark Corners" loading="lazy">
-          <div class="photo-overlay">
-            <span class="photo-title">Dark Corners</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="photo-item" data-index="3" tabindex="0" role="button" aria-label="Open photo: Portal">
-        <div class="photo-wrap">
-          <img src="https://raw.githubusercontent.com/kintsukuroi814/portfolio/main/Portal.jpg" alt="Portal" loading="lazy">
-          <div class="photo-overlay">
-            <span class="photo-title">Portal</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="photo-item" data-index="4" tabindex="0" role="button" aria-label="Open photo: Follow the Sun">
-        <div class="photo-wrap">
-          <img src="https://raw.githubusercontent.com/kintsukuroi814/portfolio/main/Follow%20the%20sun.JPG" alt="Follow the Sun" loading="lazy">
-          <div class="photo-overlay">
-            <span class="photo-title">Follow the Sun</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="photo-item" data-index="5" tabindex="0" role="button" aria-label="Open photo: Silent">
-        <div class="photo-wrap">
-          <img src="https://raw.githubusercontent.com/kintsukuroi814/portfolio/main/silent.jpg" alt="Silent" loading="lazy">
-          <div class="photo-overlay">
-            <span class="photo-title">Silent</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="photo-item" data-index="6" tabindex="0" role="button" aria-label="Open photo: Know Thyself">
-        <div class="photo-wrap">
-          <img src="https://raw.githubusercontent.com/kintsukuroi814/portfolio/main/Know%20thyself.jpg" alt="Know Thyself" loading="lazy">
-          <div class="photo-overlay">
-            <span class="photo-title">Know Thyself</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="photo-item" data-index="7" tabindex="0" role="button" aria-label="Open photo: Sleeping Piano">
-        <div class="photo-wrap">
-          <img src="https://raw.githubusercontent.com/kintsukuroi814/portfolio/main/Sleeping%20piano.jpg" alt="Sleeping Piano" loading="lazy">
-          <div class="photo-overlay">
-            <span class="photo-title">Sleeping Piano</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="photo-item" data-index="8" tabindex="0" role="button" aria-label="Open photo: Carpe Diem">
-        <div class="photo-wrap">
-          <img src="https://raw.githubusercontent.com/kintsukuroi814/portfolio/main/Carpe%20diem.jpg" alt="Carpe Diem" loading="lazy">
-          <div class="photo-overlay">
-            <span class="photo-title">Carpe Diem</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="photo-item" data-index="9" tabindex="0" role="button" aria-label="Open photo: Center of Gravity">
-        <div class="photo-wrap">
-          <img src="https://raw.githubusercontent.com/kintsukuroi814/portfolio/main/Center%20of%20gravity.jpg" alt="Center of Gravity" loading="lazy">
-          <div class="photo-overlay">
-            <span class="photo-title">Center of Gravity</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="photo-item" data-index="10" tabindex="0" role="button" aria-label="Open photo: Dead Skin">
-        <div class="photo-wrap">
-          <img src="https://raw.githubusercontent.com/kintsukuroi814/portfolio/main/Dead%20skin.jpg" alt="Dead Skin" loading="lazy">
-          <div class="photo-overlay">
-            <span class="photo-title">Dead Skin</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="photo-item" data-index="11" tabindex="0" role="button" aria-label="Open photo: Desceptor">
-        <div class="photo-wrap">
-          <img src="https://raw.githubusercontent.com/kintsukuroi814/portfolio/main/Desceptor.jpg" alt="Desceptor" loading="lazy">
-          <div class="photo-overlay">
-            <span class="photo-title">Desceptor</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="photo-item" data-index="12" tabindex="0" role="button" aria-label="Open photo: Going Up">
-        <div class="photo-wrap">
-          <img src="https://raw.githubusercontent.com/kintsukuroi814/portfolio/main/Going%20up.jpg" alt="Going Up" loading="lazy">
-          <div class="photo-overlay">
-            <span class="photo-title">Going Up</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="photo-item" data-index="13" tabindex="0" role="button" aria-label="Open photo: Let Go">
-        <div class="photo-wrap">
-          <img src="https://raw.githubusercontent.com/kintsukuroi814/portfolio/main/Let%20go.jpg" alt="Let Go" loading="lazy">
-          <div class="photo-overlay">
-            <span class="photo-title">Let Go</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="photo-item" data-index="14" tabindex="0" role="button" aria-label="Open photo: Maribor — Lent in Winter">
-        <div class="photo-wrap">
-          <img src="https://raw.githubusercontent.com/kintsukuroi814/portfolio/main/Maribor%20-%20Lent%20in%20winter.jpg" alt="Maribor — Lent in Winter" loading="lazy">
-          <div class="photo-overlay">
-            <span class="photo-title">Maribor — Lent in Winter</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="photo-item" data-index="15" tabindex="0" role="button" aria-label="Open photo: Missing Piece">
-        <div class="photo-wrap">
-          <img src="https://raw.githubusercontent.com/kintsukuroi814/portfolio/main/Missing%20piece.jpg" alt="Missing Piece" loading="lazy">
-          <div class="photo-overlay">
-            <span class="photo-title">Missing Piece</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="photo-item" data-index="16" tabindex="0" role="button" aria-label="Open photo: On the Go">
-        <div class="photo-wrap">
-          <img src="https://raw.githubusercontent.com/kintsukuroi814/portfolio/main/On%20the%20go.JPG" alt="On the Go" loading="lazy">
-          <div class="photo-overlay">
-            <span class="photo-title">On the Go</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="photo-item" data-index="17" tabindex="0" role="button" aria-label="Open photo: Slow Grind">
-        <div class="photo-wrap">
-          <img src="https://raw.githubusercontent.com/kintsukuroi814/portfolio/main/Slow%20grind.jpg" alt="Slow Grind" loading="lazy">
-          <div class="photo-overlay">
-            <span class="photo-title">Slow Grind</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="photo-item" data-index="18" tabindex="0" role="button" aria-label="Open photo: Street">
-        <div class="photo-wrap">
-          <img src="https://raw.githubusercontent.com/kintsukuroi814/portfolio/main/Street.JPG" alt="Street" loading="lazy">
-          <div class="photo-overlay">
-            <span class="photo-title">Street</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="photo-item" data-index="19" tabindex="0" role="button" aria-label="Open photo: Strive">
-        <div class="photo-wrap">
-          <img src="https://raw.githubusercontent.com/kintsukuroi814/portfolio/main/Strive.jpg" alt="Strive" loading="lazy">
-          <div class="photo-overlay">
-            <span class="photo-title">Strive</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="photo-item" data-index="20" tabindex="0" role="button" aria-label="Open photo: The Time Is Now">
-        <div class="photo-wrap">
-          <img src="https://raw.githubusercontent.com/kintsukuroi814/portfolio/main/The%20time%20is%20now.jpg" alt="The Time Is Now" loading="lazy">
-          <div class="photo-overlay">
-            <span class="photo-title">The Time Is Now</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="photo-item" data-index="21" tabindex="0" role="button" aria-label="Open photo: Time for Lights">
-        <div class="photo-wrap">
-          <img src="https://raw.githubusercontent.com/kintsukuroi814/portfolio/main/Time%20for%20lights.jpg" alt="Time for Lights" loading="lazy">
-          <div class="photo-overlay">
-            <span class="photo-title">Time for Lights</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="photo-item" data-index="22" tabindex="0" role="button" aria-label="Open photo: Timing Is Everything">
-        <div class="photo-wrap">
-          <img src="https://raw.githubusercontent.com/kintsukuroi814/portfolio/main/Timing%20is%20everything.jpg" alt="Timing Is Everything" loading="lazy">
-          <div class="photo-overlay">
-            <span class="photo-title">Timing Is Everything</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="photo-item" data-index="23" tabindex="0" role="button" aria-label="Open photo: When the Rich Wage War It's the Poor Who Die">
-        <div class="photo-wrap">
-          <img src="https://raw.githubusercontent.com/kintsukuroi814/portfolio/main/When%20the%20rich%20wage%20war%20it's%20the%20poor%20who%20die.jpg" alt="When the rich wage war it's the poor who die" loading="lazy">
-          <div class="photo-overlay">
-            <span class="photo-title">When the Rich Wage War…</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section class="about-section" id="about">
-    <div class="about-inner">
-      <div class="about-text">
-        <h2 class="section-title">About</h2>
-        <p class="about-body">
-          I am a photographer based in Maribor, Slovenia. I love capturing moments in my life
-          that are somewhat of a photographic diary — only I know the meaning of.
+<!-- PROJECTS -->
+<div class="container">
+    <section id="projects">
+        <div class="section-label">// Featured Work</div>
+        <h2>
+            <span data-lang-target="en" class="lang-active">Featured Projects</span>
+            <span data-lang-target="hr">Istaknuti projekti</span>
+        </h2>
+        <p class="section-desc">
+            <span data-lang-target="en" class="lang-active">Hardware builds, radio experiments, and engineering solutions from the workbench.</span>
+            <span data-lang-target="hr">Hardverski projekti, radio eksperimenti i inžinjerska rješenja s radnog stola.</span>
         </p>
-        <a href="#contact" class="about-link">Get in touch →</a>
-      </div>
-      <div class="about-image-wrap">
-        <img
-          src="https://raw.githubusercontent.com/kintsukuroi814/portfolio/main/Sleeping%20piano.jpg"
-          alt="Sleeping Piano — a personal favourite"
-          class="about-img"
-          loading="lazy"
-        >
-      </div>
+        <div class="grid">
+            <a href="Antenna.htm" class="card">
+                <div class="card-icon">📡</div>
+                <h3>Antenna Workshop</h3>
+                <p>Technical analysis of Low-cost GPINV, EH antennas and homemade Spider Beams for IOTA expeditions.</p>
+                <span class="card-arrow">→</span>
+            </a>
+            <a href="Arduino.htm" class="card">
+                <div class="card-icon">🔧</div>
+                <h3>Arduino Lab</h3>
+                <p>Microcontroller solutions and automated control systems for modern radio equipment.</p>
+                <span class="card-arrow">→</span>
+            </a>
+            <a href="sdr.htm" class="card">
+                <div class="card-icon">📻</div>
+                <h3>SDR Experiments</h3>
+                <p>Software Defined Radio implementations, the ZETA40m project and LD1a hardware integration.</p>
+                <span class="card-arrow">→</span>
+            </a>
+            <a href="electronic.htm" class="card">
+                <div class="card-icon">⚡</div>
+                <h3>Electronics</h3>
+                <p>Hardware builds from scratch: SWR meters, interfaces for Kenwood radios, and DDS controllers.</p>
+                <span class="card-arrow">→</span>
+            </a>
+            <a href="sklopovi.htm" class="card">
+                <div class="card-icon">🔩</div>
+                <h3>
+                    <span data-lang-target="en" class="lang-active">Circuit Boards</span>
+                    <span data-lang-target="hr">Sklopovi</span>
+                </h3>
+                <p>
+                    <span data-lang-target="en" class="lang-active">Custom PCB designs and assembled circuit boards for radio and measurement applications.</span>
+                    <span data-lang-target="hr">Vlastiti PCB dizajni i sklopljene ploče za radio i mjerne primjene.</span>
+                </p>
+                <span class="card-arrow">→</span>
+            </a>
+            <a href="Electronic keyer.htm" class="card">
+                <div class="card-icon">🔑</div>
+                <h3>Electronic Keyer</h3>
+                <p>Custom-built electronic keyer for CW operation with adjustable speed and memory functions.</p>
+                <span class="card-arrow">→</span>
+            </a>
+        </div>
+    </section>
+</div>
+
+<div class="divider"></div>
+
+<!-- ARCHIVES -->
+<div class="container">
+    <section id="archives">
+        <div class="section-label">// Visual & Data</div>
+        <h2>
+            <span data-lang-target="en" class="lang-active">Archives</span>
+            <span data-lang-target="hr">Arhiv</span>
+        </h2>
+        <p class="section-desc">
+            <span data-lang-target="en" class="lang-active">Diplomas, QSL cards, expedition photos and technical documentation.</span>
+            <span data-lang-target="hr">Diplome, QSL karte, fotografije ekspedicija i tehnička dokumentacija.</span>
+        </p>
+        <div class="grid">
+            <a href="Diplome.htm" class="card">
+                <div class="card-icon">🏆</div>
+                <h3>Award Gallery</h3>
+                <p>Contest diplomas, WPX awards and radio achievements collected over the years.</p>
+                <span class="card-arrow">→</span>
+            </a>
+            <a href="QSL/" class="card">
+                <div class="card-icon">📬</div>
+                <h3>QSL Cards</h3>
+                <p>Radio contact confirmations and visual history of station communications.</p>
+                <span class="card-arrow">→</span>
+            </a>
+            <a href="Iota.htm" class="card">
+                <div class="card-icon">🏝️</div>
+                <h3>IOTA Expeditions</h3>
+                <p>Island On The Air activations — Rab 2014, Rab 2019 and beyond.</p>
+                <span class="card-arrow">→</span>
+            </a>
+            <a href="DR2A+/" class="card">
+                <div class="card-icon">📄</div>
+                <h3>Technical Docs</h3>
+                <p>Board schematics, layout designs and PDF documentation for DR2A+ projects.</p>
+                <span class="card-arrow">→</span>
+            </a>
+            <a href="Diplome.htm" class="card">
+                <div class="card-icon">🌍</div>
+                <h3>DX Log</h3>
+                <p>Long distance contacts, rare DX entities and contest logs from years of operation.</p>
+                <span class="card-arrow">→</span>
+            </a>
+            <a href="Favorites.htm" class="card">
+                <div class="card-icon">🔖</div>
+                <h3>Favorites</h3>
+                <p>Useful links, resources and references for the amateur radio community.</p>
+                <span class="card-arrow">→</span>
+            </a>
+        </div>
+    </section>
+</div>
+
+<div class="divider"></div>
+
+<!-- TEORIJA / THEORY -->
+<div class="container">
+    <section id="teorija">
+        <div class="section-label">// Knowledge Base</div>
+        <h2>
+            <span data-lang-target="en" class="lang-active">Theory & Learning</span>
+            <span data-lang-target="hr">Teorija i učenje</span>
+        </h2>
+        <p class="section-desc">
+            <span data-lang-target="en" class="lang-active">Programming, electronics theory and technical resources for builders and experimenters.</span>
+            <span data-lang-target="hr">Programiranje, teorija elektronike i tehnički resursi za graditelje i eksperimentatore.</span>
+        </p>
+        <div class="grid">
+            <a href="C++.htm" class="card">
+                <div class="card-icon">💻</div>
+                <h3>C++ Programming</h3>
+                <p>Code examples and techniques for embedded and desktop C++ development.</p>
+                <span class="card-arrow">→</span>
+            </a>
+            <a href="programming.htm" class="card">
+                <div class="card-icon">⌨️</div>
+                <h3>
+                    <span data-lang-target="en" class="lang-active">Programming</span>
+                    <span data-lang-target="hr">Programiranje</span>
+                </h3>
+                <p>
+                    <span data-lang-target="en" class="lang-active">General programming resources, BASCOM, Visual Basic, and more.</span>
+                    <span data-lang-target="hr">Opći programerski resursi, BASCOM, Visual Basic i više.</span>
+                </p>
+                <span class="card-arrow">→</span>
+            </a>
+            <a href="teorija/" class="card">
+                <div class="card-icon">📖</div>
+                <h3>
+                    <span data-lang-target="en" class="lang-active">Theory</span>
+                    <span data-lang-target="hr">Teorija</span>
+                </h3>
+                <p>
+                    <span data-lang-target="en" class="lang-active">Radio wave propagation, circuit theory and fundamental electronics concepts.</span>
+                    <span data-lang-target="hr">Prostiranje radio valova, teorija sklopova i osnove elektronike.</span>
+                </p>
+                <span class="card-arrow">→</span>
+            </a>
+            <a href="bascom.htm" class="card">
+                <div class="card-icon">🖥️</div>
+                <h3>BASCOM AVR</h3>
+                <p>BASIC compiler for AVR microcontrollers — projects, tips and code libraries.</p>
+                <span class="card-arrow">→</span>
+            </a>
+        </div>
+    </section>
+</div>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<div class="container">
+    <section id="about">
+        <div class="section-label">// Station Info</div>
+        <h2>
+            <span data-lang-target="en" class="lang-active">About 9A4KJ</span>
+            <span data-lang-target="hr">O 9A4KJ</span>
+        </h2>
+        <div class="about-grid">
+            <div class="about-text">
+                <p>
+                    <span data-lang-target="en" class="lang-active">9A4KJ is the callsign of Davor Kordic, an electrical engineer and amateur radio operator based in Croatia. This site documents decades of radio experiments, hardware projects and technical knowledge.</span>
+                    <span data-lang-target="hr">9A4KJ je pozivni znak Davora Kordića, elektrotehničkog inženjera i radioamatera iz Hrvatske. Ova stranica dokumentira desetljeća radio eksperimenata, hardverskih projekata i tehničkog znanja.</span>
+                </p>
+                <p>
+                    <span data-lang-target="en" class="lang-active">Areas of interest include SDR (Software Defined Radio), antenna construction, Arduino-based automation, and CW (Morse code) operation.</span>
+                    <span data-lang-target="hr">Područja interesa uključuju SDR (Software Defined Radio), gradnju antena, automatizaciju temeljenu na Arduinu i CW (Morseov kod) rad.</span>
+                </p>
+                <p>
+                    <span data-lang-target="en" class="lang-active">Active on HF, VHF, and regular participant in international radio contests.</span>
+                    <span data-lang-target="hr">Aktivan na KV, VHF i redoviti sudionik međunarodnih radio natjecanja.</span>
+                </p>
+            </div>
+            <div class="stats">
+                <div class="stat-card">
+                    <span class="stat-number">9A</span>
+                    <span class="stat-label">DXCC Entity</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">HF</span>
+                    <span class="stat-label">+ VHF Bands</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">SDR</span>
+                    <span class="stat-label">Experiments</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">CW</span>
+                    <span class="stat-label">Operator</span>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <p>73 de 9A4KJ — Amateur Radio Station</p>
+        <p>Dedicated to Davor Kordic · Engineer & Radioamateur</p>
     </div>
-  </section>
+</footer>
 
-  <!-- CONTACT -->
-  <section class="contact-section" id="contact">
-    <div class="contact-inner">
-      <h2 class="section-title">Say hello</h2>
-      <p class="contact-sub">For collaborations, prints, or just to talk about photography.</p>
-      <a href="mailto:kintsukuroi814@gmail.com" class="contact-email">kintsukuroi814@gmail.com</a>
-    </div>
-  </section>
+<script>
+(function () {
+    // ---- PARTICLE CANVAS ----
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas.getContext('2d');
+    let W, H, particles = [];
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <p class="footer-text">© 2026 kintsukuroi — All rights reserved</p>
-    <p class="footer-text footer-credit">Photography by kintsukuroi814</p>
-  </footer>
+    function resize() {
+        W = canvas.width  = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+    }
 
-  <!-- LIGHTBOX -->
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" aria-hidden="true">
-    <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
-    <div class="lightbox-container">
-      <button class="lightbox-close" id="lightbox-close" aria-label="Close lightbox">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-        </svg>
-      </button>
-      <button class="lightbox-prev" id="lightbox-prev" aria-label="Previous photo">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <polyline points="15 18 9 12 15 6"/>
-        </svg>
-      </button>
-      <div class="lightbox-img-wrap">
-        <img src="" alt="" id="lightbox-img" class="lightbox-img">
-      </div>
-      <button class="lightbox-next" id="lightbox-next" aria-label="Next photo">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <polyline points="9 18 15 12 9 6"/>
-        </svg>
-      </button>
-      <div class="lightbox-caption">
-        <span id="lightbox-title" class="lightbox-title-text"></span>
-        <span id="lightbox-counter" class="lightbox-counter-text"></span>
-      </div>
-    </div>
-  </div>
+    function Particle() {
+        this.x = Math.random() * W;
+        this.y = Math.random() * H;
+        this.vx = (Math.random() - 0.5) * 0.3;
+        this.vy = (Math.random() - 0.5) * 0.3;
+        this.r  = Math.random() * 1.5 + 0.3;
+        this.alpha = Math.random() * 0.5 + 0.1;
+    }
 
-  <script src="main.js"></script>
+    function initParticles() {
+        const count = Math.min(Math.floor(W * H / 14000), 80);
+        particles = Array.from({ length: count }, () => new Particle());
+    }
+
+    function drawParticles() {
+        ctx.clearRect(0, 0, W, H);
+        const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+        const color = isDark ? '0,255,136' : '0,100,50';
+        particles.forEach(p => {
+            p.x += p.vx; p.y += p.vy;
+            if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+            if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${color},${p.alpha})`;
+            ctx.fill();
+        });
+        requestAnimationFrame(drawParticles);
+    }
+
+    resize();
+    initParticles();
+    drawParticles();
+    window.addEventListener('resize', () => { resize(); initParticles(); });
+
+    // ---- THEME TOGGLE ----
+    const html = document.documentElement;
+    const themeBtn = document.getElementById('theme-toggle');
+    let theme = 'dark';
+    html.setAttribute('data-theme', theme);
+
+    function setThemeIcon(t) {
+        themeBtn.innerHTML = t === 'dark'
+            ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
+            : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+    }
+    setThemeIcon(theme);
+
+    themeBtn.addEventListener('click', () => {
+        theme = theme === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', theme);
+        setThemeIcon(theme);
+    });
+
+    // ---- LANGUAGE TOGGLE ----
+    const langBtn = document.getElementById('lang-toggle');
+    let currentLang = 'en';
+
+    function setLang(lang) {
+        currentLang = lang;
+        document.querySelectorAll('[data-lang-target]').forEach(el => {
+            el.classList.toggle('lang-active', el.dataset.langTarget === lang);
+        });
+        langBtn.textContent = lang === 'en' ? 'HR' : 'EN';
+    }
+
+    langBtn.addEventListener('click', () => setLang(currentLang === 'en' ? 'hr' : 'en'));
+
+    // ---- HAMBURGER / MOBILE NAV ----
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobile-nav');
+
+    hamburger.addEventListener('click', () => {
+        const open = hamburger.classList.toggle('open');
+        mobileNav.classList.toggle('open', open);
+        hamburger.setAttribute('aria-expanded', open);
+    });
+
+    mobileNav.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+            hamburger.classList.remove('open');
+            mobileNav.classList.remove('open');
+            hamburger.setAttribute('aria-expanded', false);
+        });
+    });
+
+    // ---- SCROLL REVEAL (JS fallback) ----
+    if (!CSS.supports('animation-timeline', 'scroll()')) {
+        const sections = document.querySelectorAll('section');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.12 });
+        sections.forEach(s => observer.observe(s));
+    }
+
+    // ---- HIDE/SHOW NAV ON SCROLL ----
+    const nav = document.querySelector('.nav');
+    let lastY = 0;
+    window.addEventListener('scroll', () => {
+        const y = window.scrollY;
+        nav.style.transform = (y > lastY && y > 100) ? 'translateY(-100%)' : 'translateY(0)';
+        lastY = y;
+    }, { passive: true });
+
+})();
+</script>
 </body>
 </html>
