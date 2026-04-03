@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theoretical Materials</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to CSS file for styles -->
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            transition: background-color 0.5s, color 0.5s;
+        }
+
+        /* Light theme */
+        .light-theme {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        /* Dark theme */
+        .dark-theme {
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        nav {
+            padding: 1rem;
+            background-color: #333;
+            color: white;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+
+        .toggle-theme {
+            cursor: pointer;
+            background-color: #555;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            padding: 20px;
+        }
+
+        .card {
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .card a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+    </style>
+</head>
+<body class="light-theme">
+    <nav>
+        <a href="index.html">Home</a>
+        <button class="toggle-theme" onclick="toggleTheme()">Toggle Theme</button>
+    </nav>
+
+    <h1>Theoretical Materials</h1>
+    <div class="card-container">
+        <div class="card"><a href="teorija/pg01.doc">Page 01</a></div>
+        <div class="card"><a href="teorija/pg02.doc">Page 02</a></div>
+        <div class="card"><a href="teorija/pg03.doc">Page 03</a></div>
+        <div class="card"><a href="teorija/pg04.doc">Page 04</a></div>
+        <div class="card"><a href="teorija/pg05.doc">Page 05</a></div>
+        <div class="card"><a href="teorija/pg06.doc">Page 06</a></div>
+        <div class="card"><a href="teorija/pg07.doc">Page 07</a></div>
+        <div class="card"><a href="teorija/pg08.doc">Page 08</a></div>
+        <div class="card"><a href="teorija/pg09.doc">Page 09</a></div>
+        <div class="card"><a href="teorija/pg10.doc">Page 10</a></div>
+        <div class="card"><a href="teorija/pg11.doc">Page 11</a></div>
+        <div class="card"><a href="teorija/pg12.doc">Page 12</a></div>
+        <div class="card"><a href="teorija/pg13.doc">Page 13</a></div>
+        <div class="card"><a href="teorija/pg14.doc">Page 14</a></div>
+        <div class="card"><a href="teorija/pg15.doc">Page 15</a></div>
+        <div class="card"><a href="teorija/pg16.doc">Page 16</a></div>
+        <div class="card"><a href="teorija/pg17.doc">Page 17</a></div>
+        <div class="card"><a href="teorija/pg18.doc">Page 18</a></div>
+        <div class="card"><a href="teorija/pg19.doc">Page 19</a></div>
+        <div class="card"><a href="teorija/pg20.doc">Page 20</a></div>
+        <div class="card"><a href="teorija/pg21.doc">Page 21</a></div>
+        <div class="card"><a href="teorija/pg22.doc">Page 22</a></div>
+        <div class="card"><a href="teorija/pg23.doc">Page 23</a></div>
+        <div class="card"><a href="teorija/pg24.doc">Page 24</a></div>
+        <div class="card"><a href="teorija/pg25.doc">Page 25</a></div>
+        <div class="card"><a href="teorija/electronica.htm">Electronica</a></div>
+        <div class="card"><a href="teorija/nas.str">Nas</a></div>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle('dark-theme');
+            body.classList.toggle('light-theme');
+        }
+    </script>
+</body>
+</html>
