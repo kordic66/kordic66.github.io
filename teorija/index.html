@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teorija HAM Elektrotehnike - 9A4KJ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00ff88;
+            --bg: #0a0a0c;
+            --card-bg: #16161a;
+            --text: #e0e0e6;
+            --text-muted: #94949e;
+            --border: rgba(255, 255, 255, 0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background: var(--bg); 
+            color: var(--text); 
+            font-family: 'Inter', sans-serif; 
+            line-height: 1.6;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 2rem; }
+
+        header {
+            text-align: center;
+            padding: 4rem 0;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 255, 136, 0.05) 0%, transparent 70%);
+        }
+
+        .title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .card h3 { 
+            font-size: 1.2rem; 
+            color: var(--primary); 
+            margin-bottom: 0.5rem;
+        }
+
+        .card p { 
+            color: var(--text-muted); 
+            font-size: 0.9rem; 
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .back-link:hover { text-decoration: underline; }
+
+        @media (max-width: 768px) {
+            .title { font-size: 2rem; }
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="title">📘 Teorija HAM Elektrotehnike</div>
+        <div class="subtitle">Sveobuhvatni edukativni materijali za radioamaterizam i elektroniku</div>
+    </header>
+
+    <div class="container">
+        <h2 style="margin-top: 3rem; margin-bottom: 2rem; color: var(--primary);">📚 Tablica Sadržaja</h2>
+        
+        <div class="grid">
+
+            <a href="nas.pdf" class="card">
+                <h3>📘 Uvod </h3>
+                <p>Referentni PDF dokument</p>
+            </a>
+           
+            <a href="pg01.pdf" class="card">
+                <h3>1. Vodljivost, Vodiči, Poluvodiči</h3>
+                <p>Električna struja, električno polje, materijali</p>
+            </a>
+            <a href="pg02.pdf" class="card">
+                <h3>2. Ohmov i Kirchoffovi Zakoni</h3>
+                <p>Snaga, energija, kapacitet baterije</p>
+            </a>
+            <a href="pg03.pdf" class="card">
+                <h3>3. Sinusoidalni Signali</h3>
+                <p>Audio signali i analiza valnih oblika</p>
+            </a>
+            <a href="pg04.pdf" class="card">
+                <h3>4. Amplitudna Modulacija</h3>
+                <p>Vrste rada, područja i valne duljine</p>
+            </a>
+            <a href="pg05.pdf" class="card">
+                <h3>5. SSB Modulacija</h3>
+                <p>Modulacija s jednim bočnim pojasom</p>
+            </a>
+            <a href="pg06.pdf" class="card">
+                <h3>6. Frekvencijska Modulacija</h3>
+                <p>Snaga i energija, sinusoidalni signali</p>
+            </a>
+            <a href="pg07.pdf" class="card">
+                <h3>7. Definicija Decibela</h3>
+                <p>Logaritamska mjerenja signala</p>
+            </a>
+            <a href="pg08.pdf" class="card">
+                <h3>8. Pojačala i Komponente</h3>
+                <p>Kaskadni spojevi, vrste otpornika</p>
+            </a>
+            <a href="pg09.pdf" class="card">
+                <h3>9. Kondenzator i Zavojnica</h3>
+                <p>Pasivne elektroničke komponente</p>
+            </a>
+            <a href="pg10.pdf" class="card">
+                <h3>10. Transformator i Diode</h3>
+                <p>Elektromagnetska indukcija, ispravljači</p>
+            </a>
+            <a href="pg11.pdf" class="card">
+                <h3>11. Tranzistor</h3>
+                <p>Aktivna elektronička komponenta</p>
+            </a>
+            <a href="pg12.pdf" class="card">
+                <h3>12. Krugovi i Filteri</h3>
+                <p>Frekvencijska obrada signala</p>
+            </a>
+            <a href="pg13.pdf" class="card">
+                <h3>13. NF i VF Pojačala</h3>
+                <p>Niskofrekvencijsko i visokofrekvencijsko pojačanje</p>
+            </a>
+            <a href="pg14.pdf" class="card">
+                <h3>14. Harmonici i Detektori</h3>
+                <p>Frekvencijska analiza i detekcija signala</p>
+            </a>
+            <a href="pg16.pdf" class="card">
+                <h3>15. Oscilator</h3>
+                <p>Generiranje frekvencije i stabilnost</p>
+            </a>
+            <a href="pg18.pdf" class="card">
+                <h3>16. Prijemnici</h3>
+                <p>Receiver arhitektura i funkcioniranje</p>
+            </a>
+            <a href="pg19.pdf" class="card">
+                <h3>17. Predajnici</h3>
+                <p>Transmitter dizajn i karakteristike</p>
+            </a>
+            <a href="pg20.pdf" class="card">
+                <h3>18. Antene i Prijenosni Vodovi</h3>
+                <p>Radijaciski elementi i propagacija energije</p>
+            </a>
+            <a href="pg21.pdf" class="card">
+                <h3>19. Propagacija</h3>
+                <p>Radio valovi i ionosfera</p>
+            </a>
+            <a href="pg22.pdf" class="card">
+                <h3>20. Mjerenja</h3>
+                <p>Mjerenja u radioamaterskoj praksi</p>
+            </a>
+            <a href="pg23.pdf" class="card">
+                <h3>21. Mjerenja II</h3>
+                <p>Naprednija mjerenja i kalibracije</p>
+            </a>
+            <a href="pg24.pdf" class="card">
+                <h3>22. Sigurnost i Propisi</h3>
+                <p>Mjere protiv smetnji, regulacije, HAM pravila</p>
+            </a>
+            <a href="pg25.pdf" class="card">
+                <h3>23. Telegrafija CW</h3>
+                <p>Oblik uspostave veze u telegrafiji CW</p>
+            </a>
+        </div>
+
+        <h2 style="margin-top: 3rem; margin-bottom: 2rem; color: var(--primary);">📁 Dodatni Resursi</h2>
+        
+        <div class="grid">
+            
+            <a href="nas.pdf" class="card">
+                <h3>📘 Naš PDF</h3>
+                <p>Referentni PDF dokument</p>
+            </a>
+           
+        </div>
+
+        <a href="../index.html" class="back-link">← Nazad na Početnu</a>
+    </div>
+</body>
+</html>
