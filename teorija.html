@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HAM Elektrotehnika — Teorija</title>
     
-    <!-- Fontovi (isti kao na index.html) -->
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
@@ -16,6 +15,7 @@
             --surface: #111621;
             --text: #dde1ea;
             --text-muted: #7a8299;
+            --border: rgba(255,255,255,0.08);
         }
         [data-theme="light"] {
             --bg: #f4f5f7;
@@ -23,6 +23,7 @@
             --text: #1a1d26;
             --text-muted: #5a6070;
             --primary: #008f74;
+            --border: rgba(0,0,0,0.08);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -33,93 +34,119 @@
             min-height: 100vh;
             line-height: 1.6;
         }
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .container { 
+            max-width: 1150px; 
+            margin: 0 auto; 
+            padding: 20px; 
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            background: var(--surface);
+            color: var(--primary);
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            border: 1px solid rgba(0,212,170,0.3);
+            z-index: 10;
+        }
 
         header {
             text-align: center;
-            padding: 40px 20px 30px;
-            border-bottom: 1px solid rgba(0,212,170,0.15);
+            padding: 60px 20px 40px;
         }
         h1 {
-            font-size: 2.8rem;
+            font-size: 3rem;
             color: var(--primary);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         .subtitle {
             color: var(--text-muted);
-            font-size: 1.2rem;
+            font-size: 1.25rem;
         }
 
         .pdf-list {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 16px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 18px;
+            margin-top: 30px;
         }
         .pdf-card {
             background: var(--surface);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 12px;
-            padding: 20px;
+            border: 2px solid var(--border);
+            border-radius: 14px;
+            padding: 24px 20px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
         }
         .pdf-card:hover {
-            transform: translateY(-6px);
             border-color: var(--primary);
-            box-shadow: 0 10px 30px rgba(0,212,170,0.15);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 35px rgba(0, 212, 170, 0.15);
         }
-        .pdf-card h3 {
+        .pdf-card .number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.1rem;
+            font-weight: 700;
             color: var(--primary);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+        }
+        .pdf-card .title {
+            font-size: 1.08rem;
+            line-height: 1.45;
+            color: var(--text);
         }
 
         /* PDF Viewer */
         #pdf-viewer {
             position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.95);
+            inset: 0;
+            background: rgba(0,0,0,0.97);
             display: none;
             flex-direction: column;
-            z-index: 1000;
+            z-index: 2000;
         }
         #pdf-header {
             background: var(--surface);
-            padding: 15px 20px;
+            padding: 16px 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--primary);
+            border-bottom: 2px solid var(--primary);
         }
         #pdf-container {
             flex: 1;
             overflow: auto;
-            padding: 20px;
+            padding: 25px;
             text-align: center;
         }
         iframe {
             width: 100%;
-            max-width: 1000px;
-            height: 90vh;
+            max-width: 1080px;
+            height: 92vh;
             border: none;
-            border-radius: 8px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            border-radius: 10px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.8);
         }
         button {
             background: var(--primary);
             color: white;
             border: none;
-            padding: 10px 18px;
+            padding: 11px 22px;
+            margin: 0 6px;
             border-radius: 8px;
             cursor: pointer;
             font-weight: 500;
         }
-        .close-btn {
-            background: #e74c3c;
-        }
+        .close-btn { background: #e74c3c; }
     </style>
 </head>
 <body data-theme="dark">
+
+<a href="../index.html" class="back-btn">← Natrag na početnu</a>
 
 <div class="container">
     <header>
@@ -127,23 +154,7 @@
         <p class="subtitle">Teorijski materijali za radioamatere</p>
     </header>
 
-    <div class="pdf-list">
-        <!-- Generirani linkovi za pg01.pdf do pg25.pdf -->
-        <div class="pdf-card" onclick="openPDF('teorija/pg01.pdf', 'Stranica 01')"><h3>01</h3><p>Osnove elektrotehnike</p></div>
-        <div class="pdf-card" onclick="openPDF('teorija/pg02.pdf', 'Stranica 02')"><h3>02</h3><p>Električni krugovi</p></div>
-        <div class="pdf-card" onclick="openPDF('teorija/pg03.pdf', 'Stranica 03')"><h3>03</h3><p>Naponski i strujni izvori</p></div>
-        <div class="pdf-card" onclick="openPDF('teorija/pg04.pdf', 'Stranica 04')"><h3>04</h3><p>Poluvodiči i diode</p></div>
-        <div class="pdf-card" onclick="openPDF('teorija/pg05.pdf', 'Stranica 05')"><h3>05</h3><p>Tranzistori</p></div>
-        <!-- Nastavi do 25... (skratio sam za primjer) -->
-        <!-- Molim te reci mi točne naslove ako ih imaš, inače ću ih sve numerirati jednostavno -->
-    </div>
-
-    <!-- Dodatne datoteke -->
-    <div class="pdf-list" style="margin-top: 60px;">
-        <div class="pdf-card" onclick="openPDF('teorija/nas.pdf', 'Naslovna / Sadržaj')"><h3>Naslovna i sadržaj</h3></div>
-        <div class="pdf-card" onclick="window.open('teorija/electronica.htm.doc', '_blank')"><h3>Electronica (htm)</h3></div>
-        <div class="pdf-card" onclick="window.open('teorija/sadrzaj.htm', '_blank')"><h3>Sadržaj</h3></div>
-    </div>
+    <div class="pdf-list" id="pdf-list"></div>
 </div>
 
 <!-- PDF VIEWER -->
@@ -162,43 +173,80 @@
 </div>
 
 <script>
-let currentPDFs = [];
-let currentIndex = 0;
-
-const pdfFiles = [
-    {file: "teorija/pg01.pdf", title: "Stranica 01"},
-    {file: "teorija/pg02.pdf", title: "Stranica 02"},
-    {file: "teorija/pg03.pdf", title: "Stranica 03"},
-    {file: "teorija/pg04.pdf", title: "Stranica 04"},
-    {file: "teorija/pg05.pdf", title: "Stranica 05"},
-    {file: "teorija/pg06.pdf", title: "Stranica 06"},
-    {file: "teorija/pg07.pdf", title: "Stranica 07"},
-    {file: "teorija/pg08.pdf", title: "Stranica 08"},
-    {file: "teorija/pg09.pdf", title: "Stranica 09"},
-    {file: "teorija/pg10.pdf", title: "Stranica 10"},
-    {file: "teorija/pg11.pdf", title: "Stranica 11"},
-    {file: "teorija/pg12.pdf", title: "Stranica 12"},
-    {file: "teorija/pg13.pdf", title: "Stranica 13"},
-    {file: "teorija/pg14.pdf", title: "Stranica 14"},
-    {file: "teorija/pg15.pdf", title: "Stranica 15"},
-    {file: "teorija/pg16.pdf", title: "Stranica 16"},
-    {file: "teorija/pg17.pdf", title: "Stranica 17"},
-    {file: "teorija/pg18.pdf", title: "Stranica 18"},
-    {file: "teorija/pg19.pdf", title: "Stranica 19"},
-    {file: "teorija/pg20.pdf", title: "Stranica 20"},
-    {file: "teorija/pg21.pdf", title: "Stranica 21"},
-    {file: "teorija/pg22.pdf", title: "Stranica 22"},
-    {file: "teorija/pg23.pdf", title: "Stranica 23"},
-    {file: "teorija/pg24.pdf", title: "Stranica 24"},
-    {file: "teorija/pg25.pdf", title: "Stranica 25"}
+const chapters = [
+    {num: "01", title: "Vodljivost, vodič, poluvodič, izolator, el. struja, el. polje", file: "teorija/pg01.pdf"},
+    {num: "02", title: "Ohmov zakon, Kirchoffovi zakoni, snaga, energija, kapacitet baterije", file: "teorija/pg02.pdf"},
+    {num: "03", title: "Sinusoidalni signali, audio signali", file: "teorija/pg03.pdf"},
+    {num: "04", title: "Modulacija, amplitudna modulacija, tablica vrsta rada, područja i valne duljine", file: "teorija/pg04.pdf"},
+    {num: "05", title: "SSB-Modulacija s jednim bočnim pojasom", file: "teorija/pg05.pdf"},
+    {num: "06", title: "Frekvencijska modulacija, snaga i energija, snaga sinusoidalnih signala", file: "teorija/pg06.pdf"},
+    {num: "07", title: "Definicija decibela", file: "teorija/pg07.pdf"},
+    {num: "08", title: "Omjeri snaga ulaz-izlaz, kaskadni spoj pojačala, komponente, vrste otpornika", file: "teorija/pg08.pdf"},
+    {num: "09", title: "Kondenzator, zavojnica", file: "teorija/pg09.pdf"},
+    {num: "10", title: "Transformator, diode", file: "teorija/pg10.pdf"},
+    {num: "11", title: "Tranzistor", file: "teorija/pg11.pdf"},
+    {num: "12", title: "Krugovi, filteri", file: "teorija/pg12.pdf"},
+    {num: "13", title: "NF i VF pojačala", file: "teorija/pg13.pdf"},
+    {num: "14", title: "Harmonici, detektori", file: "teorija/pg14.pdf"},
+    {num: "15", title: "Oscilator", file: "teorija/pg15.pdf"},
+    {num: "16", title: "Prijemnici", file: "teorija/pg16.pdf"},
+    {num: "17", title: "Odašiljači", file: "teorija/pg17.pdf"},
+    {num: "18", title: "Antene i prijenosni vodovi", file: "teorija/pg18.pdf"},
+    {num: "19", title: "Propagacija", file: "teorija/pg19.pdf"},
+    {num: "20", title: "Mjerenja", file: "teorija/pg20.pdf"},
+    {num: "21", title: "Mjerenja", file: "teorija/pg21.pdf"},
+    {num: "22", title: "Mjere protiv smetnji, sigurnost, hrvatska i međunarodna pravila", file: "teorija/pg22.pdf"},
+    {num: "23", title: "Oblik uspostave veze u telegrafiji CW", file: "teorija/pg23.pdf"},
+    {num: "24", title: "Mjerenja", file: "teorija/pg24.pdf"},
+    {num: "25", title: "Oblik uspostave veze u telegrafiji CW", file: "teorija/pg25.pdf"}
 ];
 
-function openPDF(file, title) {
-    currentPDFs = pdfFiles;
-    currentIndex = pdfFiles.findIndex(p => p.file === file);
-    if (currentIndex === -1) currentIndex = 0;
+const extraFiles = [
+    {title: "Naslovna i sadržaj", file: "teorija/nas.pdf"},
+    {title: "Electronica", file: "teorija/electronica.htm.doc"},
+    {title: "Sadržaj", file: "teorija/sadrzaj.htm"}
+];
 
-    document.getElementById('pdf-title').textContent = title || "Teorija elektrotehnike";
+// Generiranje kartica
+const listContainer = document.getElementById('pdf-list');
+
+chapters.forEach(ch => {
+    const card = document.createElement('div');
+    card.className = 'pdf-card';
+    card.innerHTML = `
+        <div class="number">${ch.num}</div>
+        <div class="title">${ch.title}</div>
+    `;
+    card.onclick = () => openPDF(ch.file, `${ch.num} — ${ch.title}`);
+    listContainer.appendChild(card);
+});
+
+// Dodatne kartice
+extraFiles.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'pdf-card';
+    card.innerHTML = `
+        <div class="number" style="font-size:1.6rem; margin-bottom:12px;">★</div>
+        <div class="title">${item.title}</div>
+    `;
+    card.onclick = () => {
+        if (item.file.endsWith('.pdf')) {
+            openPDF(item.file, item.title);
+        } else {
+            window.open(item.file, '_blank');
+        }
+    };
+    listContainer.appendChild(card);
+});
+
+let currentIndex = 0;
+let currentPDFs = chapters;
+
+function openPDF(file, title) {
+    currentIndex = chapters.findIndex(ch => ch.file === file);
+    if (currentIndex === -1) currentIndex = 0;
+    
+    document.getElementById('pdf-title').textContent = title;
     document.getElementById('pdf-frame').src = file;
     document.getElementById('pdf-viewer').style.display = 'flex';
 }
@@ -210,20 +258,19 @@ function closePDF() {
 
 function nextPDF() {
     currentIndex = (currentIndex + 1) % currentPDFs.length;
-    const pdf = currentPDFs[currentIndex];
-    document.getElementById('pdf-title').textContent = pdf.title;
-    document.getElementById('pdf-frame').src = pdf.file;
+    const ch = currentPDFs[currentIndex];
+    document.getElementById('pdf-title').textContent = `${ch.num} — ${ch.title}`;
+    document.getElementById('pdf-frame').src = ch.file;
 }
 
 function prevPDF() {
     currentIndex = (currentIndex - 1 + currentPDFs.length) % currentPDFs.length;
-    const pdf = currentPDFs[currentIndex];
-    document.getElementById('pdf-title').textContent = pdf.title;
-    document.getElementById('pdf-frame').src = pdf.file;
+    const ch = currentPDFs[currentIndex];
+    document.getElementById('pdf-title').textContent = `${ch.num} — ${ch.title}`;
+    document.getElementById('pdf-frame').src = ch.file;
 }
 
-// Zatvori ESC tipkom
-document.addEventListener('keydown', function(e) {
+document.addEventListener('keydown', e => {
     if (e.key === "Escape") closePDF();
 });
 </script>
