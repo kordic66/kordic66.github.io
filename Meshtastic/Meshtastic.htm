@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n-title>Novi oblici komunikacije - Meshtastic | 9A4KJ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+ <style>
+    :root{--primary:#00ff88;--primary-dim:rgba(0,255,136,.10);--bg:#0a0a0c;--card-bg:#16161a;--text:#e0e0e6;--text-muted:#7a7a88;--text-faint:#44444e;--border:rgba(255,255,255,.07);--border-hover:rgba(0,255,136,.4);--radius:10px;--font-body:'Satoshi','Helvetica Neue',sans-serif;--font-mono:'JetBrains Mono','Courier New',monospace;}
+    [data-theme="light"]{--primary:#007a40;--primary-dim:rgba(0,122,64,.10);--bg:#f2f2ee;--card-bg:#fff;--text:#1a1a20;--text-muted:#5a5a68;--text-faint:#a0a0aa;--border:rgba(0,0,0,.09);--border-hover:rgba(0,122,64,.4);}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth;}
+    body{background:var(--bg);color:var(--text);font-family:var(--font-body);line-height:1.65;transition:background .3s,color .3s;}
+    a{text-decoration:none;color:inherit;}
+    img{display:block;max-width:100%;height:auto;}
+    .wrap{max-width:1100px;margin:0 auto;padding:4.5rem 2rem 5rem;}
+    .hero{margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid var(--border);}
+    .hero h1{font-family:var(--font-mono);font-size:clamp(2rem,5vw,3rem);font-weight:700;color:var(--primary);margin-bottom:.6rem;line-height:1.1;}
+    .hero p{color:var(--text-muted);font-size:1rem;max-width:60ch;}
+    .sec{margin-bottom:3rem;}
+    .sec h2{font-size:1.3rem;font-weight:700;margin-bottom:1rem;padding-left:1rem;border-left:3px solid var(--primary);}
+    .sec p{color:var(--text-muted);margin-bottom:.8rem;line-height:1.75;max-width:70ch;}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;color:var(--primary);font-size:.9rem;border:1px solid var(--border-hover);border-radius:var(--radius);padding:.45rem 1rem;margin:.4rem 0 .8rem;transition:background .2s;display:block;width:fit-content;}
+    .btn:hover{background:var(--primary-dim);}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin-top:1rem;}
+    .grid a{border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);transition:border-color .2s,transform .2s;display:block;}
+    .grid a:hover{border-color:var(--primary);transform:scale(1.02);}
+    .grid img{width:100%;height:160px;object-fit:cover;}
+    .grid .cap{padding:.45rem .7rem;font-size:.78rem;color:var(--text-muted);background:var(--card-bg);}
+    .thumbs{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.8rem;}
+    .thumbs a{border-radius:8px;overflow:hidden;border:1px solid var(--border);transition:border-color .2s;}
+    .thumbs a:hover{border-color:var(--primary);}
+    .thumbs img{width:100px;height:100px;object-fit:cover;display:block;}
+    .links{list-style:none;margin-top:.8rem;}
+    .links li{margin-bottom:.5rem;}
+    .links a{color:var(--primary);font-size:.95rem;}
+    .links a::before{content:'→ ';font-size:.8rem;}
+    .links a:hover{opacity:.75;}
+    pre{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;overflow-x:auto;font-family:var(--font-mono);font-size:.85rem;color:var(--text-muted);margin-top:.8rem;}
+    footer{margin-top:3.5rem;padding-top:1.5rem;border-top:1px solid var(--border);text-align:center;color:var(--text-faint);font-family:var(--font-mono);font-size:.78rem;}
+    footer a{color:var(--primary);}
+    @media(max-width:600px){.wrap{padding:3.5rem 1.25rem 4rem;}}
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <a href="index.html" class="back-link">
+      <span>←</span>
+      <span data-i18n="back">Natrag na 9A4KJ Home</span>
+    </a>
+    <div class="lang-switcher">
+      <button class="lang-btn active" data-lang="hr" onclick="switchLanguage('hr')">HR</button>
+      <button class="lang-btn" data-lang="en" onclick="switchLanguage('en')">EN</button>
+    </div>
+  </header>
+  
+  <h1>
+    <span data-i18n="title">📡 Novi oblici komunikacije - Meshtastic</span>
+  </h1>
+  
+  <p class="intro" data-i18n="intro">
+    Meshtastic je otvoreni projekt za izgradnju LoRa mesh mreže za razmjenu kratkih poruka bez mobilne mreže ili interneta. Koristi male radio uređaje (npr. LILYGO T-Beam, T-Echo, LoRa32) temeljene na ESP32 ili nRF52840 mikrokontrolerima, s LoRa RF čipovima kao što su SX1276, SX1262 i SX1280.
+  </p>
+  
+  <h2 data-i18n="devices-title">Podržani LILYGO Meshtastic uređaji</h2>
+  
+  <div class="device-card">
+    <h3 data-i18n="device1-title">T-Deck Meshtastic</h3>
+    <p data-i18n="device1-desc">
+      ESP32 pločica s Wi-Fi i Bluetooth, LoRa transceiver <strong>SX1276/SX1262</strong>, GPS (NEO-6M ili NEO-M8N), držač za 18650 bateriju. Dostupne verzije za <strong>433/868/915/923 MHz</strong>. Idealno za terensku upotrebu s GPS praćenjem i mobilnom baterijom.
+	  <a href="Meshtastic/T-Deck Pro.jpg" target="_blank"><img src="Meshtastic/T-Deck Pro.jpg" alt="T-Deck Pro"></a>
+    </p>
+  </div>
+  
+  <div class="device-card">
+    <h3 data-i18n="device2-title">T-Beam SUPREME Meshtastic</h3>
+    <p data-i18n="device2-desc">
+      Novija varijanta s <strong>ESP32-S3</strong> (WiFi & Bluetooth 5 LE), LoRa <strong>SX1262</strong>, NEO-M10S GPS modulom, uključen 1.3" OLED zaslon, BME280 senzor i IMU. Frekvencije: <strong>433/868/915 MHz</strong>. Premium opcija s kompletnom opremom.
+    </p>
+  </div>
+  
+  <div class="device-card">
+    <h3 data-i18n="device3-title">T3S3 LoRa32</h3>
+    <p data-i18n="device3-desc">
+      ESP32 s LoRa <strong>SX127x/SX1262</strong>, OLED zaslonom, microSD konektorom. Verzije za <strong>433/868/915 MHz</strong>. Pogodno kao stacionarni ili kućni čvor, povezan na USB napajanje. Kompaktan i povoljan za fiksne postavke.
+	   <a href="Meshtastic/LoRa32 T3S3.jpg" target="_blank"><img src="Meshtastic/LoRa32 T3S3.jpg" alt="LoRa_ESP32_T3S3"></a>
+	   <a href="Meshtastic/T3S3_gray.jpg" target="_blank"><img src="Meshtastic/T3S3_gray.jpg" alt="LoRa_ESP32_T3S3"></a>
+	   <a href="Meshtastic/T3S3_orange.jpg" target="_blank"><img src="Meshtastic/T3S3_orange.jpg" alt="LoRa_ESP32_T3S3"></a>
+	   <a href="Meshtastic/T3S3_violet.jpg" target="_blank"><img src="Meshtastic/T3S3_violet.jpg" alt="LoRa_ESP32_T3S3"></a>
+    </p>
+  </div>
+  
+  <div class="device-card">
+    <h3 data-i18n="device4-title">Meshtastic Core MCP RP2040</h3>
+    <p data-i18n="device4-desc">
+      Modularna pločica bazirana na <strong>RP2040 mikrokontroleru</strong>, dizajnirana za Meshtastic projekte. Podržava LoRa čipove poput <strong>SX1262</strong>, kompatibilna je s <strong>868 MHz EU frekvencijom</strong>. Nudi fleksibilnost pri izradi custom Meshtastic uređaja s mogućnošću proširenja pomoću dodatnih modula. Idealno za radioamatere koji žele graditi vlastite mesh čvorove.
+    </p>
+  </div>
+  
+  <div class="device-card">
+    <h3 data-i18n="device5-title">Raspberry Pi Pico W</h3>
+    <p data-i18n="device5-desc">
+      <strong>Gotovo rješenje</strong> temeljeno na <strong>RP2040 čipu</strong> s integriranim <strong>Wi-Fi i Bluetooth LE (BLE)</strong> modulom. Kada se poveže s LoRa modulom (SX1262), postaje potpuno funkcionalan Meshtastic uređaj. Raspberry Pi Pico W je široko dostupan, jeftin i pogodan za eksperimentiranje i prototipiziranje mesh mreža. Odličan izbor za početnike i hobi projekte.
+	  <a href="Meshtastic/T-Deck Pro and RPi Pico w.jpg" target="_blank"><img src="Meshtastic/T-Deck Pro and RPi Pico w.jpg" alt="T-Deck Pro and RPi Pico w"></a>
+    </p>
+  </div>
+  
+  <h2 data-i18n="links-title">Korisni linkovi</h2>
+  <ul>
+    <li><a href="https://meshtastic.org" target="_blank" data-i18n="link1">Meshtastic službena stranica</a></li>
+    <li><a href="https://lilygo.cc" target="_blank" data-i18n="link2">LILYGO službeni shop</a></li>
+    <li><a href="https://meshtastic.org/docs/hardware/" target="_blank" data-i18n="link3">Meshtastic Hardware dokumentacija</a></li>
+  </ul>
+  
+  <p style="margin-top:3rem">
+    <a href="index.html" class="back-link">
+      <span>←</span>
+      <span data-i18n="back">Natrag na 9A4KJ Home</span>
+    </a>
+  </p>
+</div>
+
+<script>
+const translations = {
+  hr: {
+    back: 'Natrag na 9A4KJ Home',
+    title: '📡 Novi oblici komunikacije - Meshtastic',
+    intro: 'Meshtastic je otvoreni projekt za izgradnju LoRa mesh mreže za razmjenu kratkih poruka bez mobilne mreže ili interneta. Koristi male radio uređaje (npr. LILYGO T-Beam, T-Echo, LoRa32) temeljene na ESP32 ili nRF52840 mikrokontrolerima, s LoRa RF čipovima kao što su SX1276, SX1262 i SX1280.',
+    'devices-title': 'Podržani LILYGO Meshtastic uređaji',
+    'device1-title': 'T-Beam Meshtastic',
+    'device1-desc': 'ESP32 pločica s Wi-Fi i Bluetooth, LoRa transceiver <strong>SX1276/SX1262</strong>, GPS (NEO-6M ili NEO-M8N), držač za 18650 bateriju. Dostupne verzije za <strong>433/868/915/923 MHz</strong>. Idealno za terensku upotrebu s GPS praćenjem i mobilnom baterijom.',
+    'device2-title': 'T-Beam SUPREME Meshtastic',
+    'device2-desc': 'Novija varijanta s <strong>ESP32-S3</strong> (WiFi & Bluetooth 5 LE), LoRa <strong>SX1262</strong>, NEO-M10S GPS modulom, uključen 1.3" OLED zaslon, BME280 senzor i IMU. Frekvencije: <strong>433/868/915 MHz</strong>. Premium opcija s kompletnom opremom.',
+    'device3-title': 'TTGO LoRa32',
+    'device3-desc': 'ESP32 s LoRa <strong>SX127x/SX1262</strong>, OLED zaslonom, microSD konektorom. Verzije za <strong>433/868/915 MHz</strong>. Pogodno kao stacionarni ili kućni čvor, povezan na USB napajanje. Kompaktan i povoljan za fiksne postavke.',
+    'device4-title': 'Meshtastic Core MCP RP2040',
+    'device4-desc': 'Modularna pločica bazirana na <strong>RP2040 mikrokontroleru</strong>, dizajnirana za Meshtastic projekte. Podržava LoRa čipove poput <strong>SX1262</strong>, kompatibilna je s <strong>868 MHz EU frekvencijom</strong>. Nudi fleksibilnost pri izradi custom Meshtastic uređaja s mogućnošću proširenja pomoću dodatnih modula. Idealno za radioamatere koji žele graditi vlastite mesh čvorove.',
+    'device5-title': 'Raspberry Pi Pico W',
+    'device5-desc': '<strong>Gotovo rješenje</strong> temeljeno na <strong>RP2040 čipu</strong> s integriranim <strong>Wi-Fi i Bluetooth LE (BLE)</strong> modulom. Kada se poveže s LoRa modulom (SX1262), postaje potpuno funkcionalan Meshtastic uređaj. Raspberry Pi Pico W je široko dostupan, jeftin i pogodan za eksperimentiranje i prototipiziranje mesh mreža. Odličan izbor za početnike i hobi projekte.',
+    'links-title': 'Korisni linkovi',
+    link1: 'Meshtastic službena stranica',
+    link2: 'LILYGO službeni shop',
+    link3: 'Meshtastic Hardware dokumentacija'
+  },
+  en: {
+    back: 'Back to 9A4KJ Home',
+    title: '📡 New Communication Forms - Meshtastic',
+    intro: 'Meshtastic is an open-source project for building LoRa mesh networks for exchanging short messages without mobile networks or internet. It uses small radio devices (e.g., LILYGO T-Beam, T-Echo, LoRa32) based on ESP32 or nRF52840 microcontrollers, with LoRa RF chips such as SX1276, SX1262, and SX1280.',
+    'devices-title': 'Supported LILYGO Meshtastic Devices',
+    'device1-title': 'T-Beam Meshtastic',
+    'device1-desc': 'ESP32 board with Wi-Fi and Bluetooth, LoRa transceiver <strong>SX1276/SX1262</strong>, GPS (NEO-6M or NEO-M8N), holder for 18650 battery. Available versions for <strong>433/868/915/923 MHz</strong>. Ideal for field use with GPS tracking and mobile battery.',
+    'device2-title': 'T-Beam SUPREME Meshtastic',
+    'device2-desc': 'Newer variant with <strong>ESP32-S3</strong> (WiFi & Bluetooth 5 LE), LoRa <strong>SX1262</strong>, NEO-M10S GPS module, includes 1.3" OLED display, BME280 sensor and IMU. Frequencies: <strong>433/868/915 MHz</strong>. Premium option with complete equipment.',
+    'device3-title': 'TTGO LoRa32',
+    'device3-desc': 'ESP32 with LoRa <strong>SX127x/SX1262</strong>, OLED display, microSD connector. Versions for <strong>433/868/915 MHz</strong>. Suitable as stationary or home node, connected to USB power. Compact and affordable for fixed setups.',
+    'device4-title': 'Meshtastic Core MCP RP2040',
+    'device4-desc': 'Modular board based on <strong>RP2040 microcontroller</strong>, designed for Meshtastic projects. Supports LoRa chips like <strong>SX1262</strong>, compatible with <strong>868 MHz EU frequency</strong>. Offers flexibility in building custom Meshtastic devices with expansion capability using additional modules. Ideal for ham radio operators who want to build their own mesh nodes.',
+    'device5-title': 'Raspberry Pi Pico W',
+    'device5-desc': '<strong>Ready solution</strong> based on <strong>RP2040 chip</strong> with integrated <strong>Wi-Fi and Bluetooth LE (BLE)</strong> module. When connected to a LoRa module (SX1262), it becomes a fully functional Meshtastic device. Raspberry Pi Pico W is widely available, cheap and suitable for experimenting and prototyping mesh networks. Excellent choice for beginners and hobby projects.',
+    'links-title': 'Useful Links',
+    link1: 'Meshtastic official website',
+    link2: 'LILYGO official shop',
+    link3: 'Meshtastic Hardware documentation'
+  }
+};
+
+function switchLanguage(lang) {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (translations[lang][key]) {
+      el.innerHTML = translations[lang][key];
+    }
+  });
+  
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+  });
+  
+  localStorage.setItem('preferredLanguage', lang);
+}
+
+// Load saved language on page load
+window.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem('preferredLanguage') || 'hr';
+  if (saved !== 'hr') {
+    switchLanguage(saved);
+  }
+});
+</script>
+</body>
+</html>
