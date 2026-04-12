@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Novi oblici komunikacije - Meshtastic | 9A4KJ</title>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #0a0a0c;
+      color: #e0e0e6;
+    }
+    h1 {
+      color: #00ff88;
+      border-bottom: 2px solid #00ff88;
+      padding-bottom: 10px;
+    }
+    h2 {
+      color: #00ff88;
+      margin-top: 30px;
+    }
+    h3 {
+      color: #66ffaa;
+    }
+    .device {
+      background: rgba(22, 22, 26, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    .frequency {
+      background: #1a0530;
+      padding: 10px;
+      border-left: 3px solid #00ff88;
+      margin: 10px 0;
+    }
+    a {
+      color: #00ff88;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌐 Novi oblici komunikacije - Meshtastic</h1>
+  
+  <h2>Što je Meshtastic?</h2>
+  <p>Meshtastic je <strong>otvoreni (open-source) sustav off-grid komunikacije</strong> koji koristi LoRa tehnologiju za razmjenu poruka između uređaja bez potrebe za tradicionalnom telekomunikacijskom infrastrukturom. Sustav radi na principu mesh mreže gdje svaki uređaj djeluje i kao komunikator i kao repetitor, proširujući doseg mreže.</p>
+  
+  <h2>CroMesh - Hrvatska Meshtastic zajednica</h2>
+  <p>Hrvatska ima aktivnu Meshtastic zajednicu pod nazivom <strong>CroMesh</strong> (<a href="https://cromesh.eu" target="_blank">cromesh.eu</a>) - decentraliziranu zajednicu za komunikaciju izvan mreže namijenjenu korisnicima Meshtastic-a u Hrvatskoj.</p>
+  
+  <div class="frequency">
+    <h3>📡 Frekvencija za Hrvatsku</h3>
+    <p><strong>EU 868 MHz frekvencija</strong> - Standardna frekvencija za Europu</p>
+    <ul>
+      <li>Frekvencijski opseg: 869.40 - 869.65 MHz</li>
+      <li>Maksimalna snaga: +27 dBm ERP (Effective Radiated Power)</li>
+      <li>Duty cycle: 10%</li>
+      <li>Centralna frekvencija (LongFast preset): 869.525 MHz</li>
+    </ul>
+  </div>
+
+  <h2>Preporučeni uređaji za Hrvatsku</h2>
+  
+  <div class="device">
+    <h3>1. LILYGO T-Beam (V1.1, M8N, S3 Core, Supreme)</h3>
+    <p><strong>Najpopularniji uređaj za Meshtastic</strong></p>
+    <ul>
+      <li><strong>MCU:</strong> ESP32 ili ESP32-S3 (WiFi & Bluetooth 5LE)</li>
+      <li><strong>LoRa Transceiver:</strong> Semtech SX1276 ili SX1262</li>
+      <li><strong>Frekvencije:</strong> 433 MHz / 868 MHz / 915 MHz / 923 MHz</li>
+      <li><strong>GPS:</strong> NEO-6M, NEO-M8N ili NEO-M10S (ovisno o modelu)</li>
+      <li><strong>Baterija:</strong> 18650 (na stražnjoj strani)</li>
+      <li><strong>Zaslon:</strong> OLED (prodaje se odvojeno na starijim modelima)</li>
+      <li><strong>Cijena:</strong> Od ~$30 do ~$40</li>
+    </ul>
+    <p><strong>Gdje kupiti:</strong> <a href="https://lilygo.cc" target="_blank">lilygo.cc</a></p>
+  </div>
+
+  <div class="device">
+    <h3>2. LILYGO T-Deck</h3>
+    <p><strong>Kompaktni uređaj s tipkovnicom i zaslonom</strong></p>
+    <ul>
+      <li><strong>MCU:</strong> ESP32-S3 dual-core procesor</li>
+      <li><strong>Zaslon:</strong> 2.8" IPS LCD touchscreen (320x240)</li>
+      <li><strong>Tastatura:</strong> LILYGO backlit T-Keyboard s trackball-om</li>
+      <li><strong>LoRa:</strong> SX1262 transceiver</li>
+      <li><strong>Audio:</strong> I2S zvučnik i mikrofon</li>
+      <li><strong>Frekvencije:</strong> 433 / 868 / 915 / 923 MHz</li>
+    </ul>
+  </div>
+
+  <div class="device">
+    <h3>3. LILYGO T-Deck Plus</h3>
+    <p><strong>Nadograđena verzija T-Deck s GPS-om</strong></p>
+    <ul>
+      <li>Sve značajke T-Deck uređaja</li>
+      <li><strong>Dodatno:</strong> GPS modul</li>
+      <li><strong>Baterija:</strong> Ugrađena 2000 mAh baterija</li>
+    </ul>
+  </div>
+
+  <div class="device">
+    <h3>4. LILYGO T-Echo</h3>
+    <p><strong>Kompaktni uređaj s e-ink zaslonom</strong></p>
+    <ul>
+      <li><strong>MCU:</strong> NRF52840</li>
+      <li><strong>LoRa:</strong> SX1262</li>
+      <li><strong>Frekvencije:</strong> 433 / 868 / 915 MHz</li>
+      <li><strong>GPS:</strong> Ublox</li>
+      <li><strong>Opcija:</strong> BME280 senzor temperature i tlaka</li>
+      <li><strong>Baterija:</strong> 850mAh</li>
+    </ul>
+  </div>
+
+  <h2>Početna postava Meshtastic uređaja</h2>
+  
+  <h3>1. Instalacija Firmware-a</h3>
+  <ol>
+    <li>Posjetite <a href="https://flasher.meshtastic.org" target="_blank">flasher.meshtastic.org</a></li>
+    <li>Spojite uređaj putem USB kabela</li>
+    <li>Odaberite svoj uređaj (npr. T-Beam 1.1, T-Deck, itd.)</li>
+    <li>Kliknite "Flash" i pričekajte instalaciju</li>
+  </ol>
+
+  <h3>2. Konfiguracija</h3>
+  <ol>
+    <li><strong>Preuzmite aplikaciju:</strong>
+      <ul>
+        <li>Android: Meshtastic iz Google Play</li>
+        <li>iOS: Meshtastic iz App Store</li>
+        <li>Desktop: <a href="https://client.meshtastic.org" target="_blank">client.meshtastic.org</a></li>
+      </ul>
+    </li>
+    <li><strong>Spojite uređaj:</strong>
+      <ul>
+        <li>Bluetooth (najjednostavnije)</li>
+        <li>USB Serial</li>
+        <li>WiFi</li>
+      </ul>
+    </li>
+    <li><strong>Postavite regiju:</strong>
+      <ul>
+        <li>Idite na Settings > LoRa</li>
+        <li>Odaberite "EU_868" za Hrvatsku</li>
+        <li>Kliknite "Send" ili "Save"</li>
+      </ul>
+    </li>
+    <li><strong>Konfigurirajte kanal:</strong>
+      <ul>
+        <li>Zadani kanal: LongFast</li>
+        <li>Za privatne grupe: promijenite ime kanala i PSK (pre-shared key)</li>
+      </ul>
+    </li>
+  </ol>
+
+  <h3>3. Optimizacija dosega</h3>
+  <ul>
+    <li><strong>Antena:</strong> Koristite odgovarajuću 868 MHz antenu</li>
+    <li><strong>Visina:</strong> Postavite uređaj na visoku poziciju s čistom linijom vidljivosti</li>
+    <li><strong>Repetitori:</strong> Postavite statične čvorove na strateškim lokacijama</li>
+    <li><strong>Snaga:</strong> Podesite TX power prema potrebi (maksimalno 27 dBm ERP za EU868)</li>
+  </ul>
+
+  <h2>Domet Meshtastic mreže</h2>
+  <ul>
+    <li><strong>Urbana područja:</strong> 100m - 1km</li>
+    <li><strong>Prigradska područja:</strong> 1-3 km</li>
+    <li><strong>Otvoreni prostor (line of sight):</strong> 5-15 km</li>
+    <li><strong>S repetitorima na visokim točkama:</strong> Do 50+ km</li>
+  </ul>
+
+  <h2>Uporaba Meshtastic mreže</h2>
+  <ul>
+    <li>📱 Razmjena tekstualnih poruka</li>
+    <li>📍 Dijeljenje lokacije (GPS tracking)</li>
+    <li>🗺️ Praćenje pozicija članova grupe</li>
+    <li>🔒 Kriptirana komunikacija (AES-CCM)</li>
+    <li>🏔️ Off-grid komunikacija za planinarenje, kampiranje, festival e</li>
+    <li>🚨 Komunikacija u kriznim situacijama</li>
+    <li>🔬 Eksperimentiranje s mesh mrežama i LoRa tehnologijom</li>
+  </ul>
+
+  <h2>Korisni linkovi</h2>
+  <ul>
+    <li><a href="https://meshtastic.org" target="_blank">Službena Meshtastic stranica</a></li>
+    <li><a href="https://cromesh.eu" target="_blank">CroMesh - Hrvatska zajednica</a></li>
+    <li><a href="https://lilygo.cc" target="_blank">LILYGO - Proizvođač uređaja</a></li>
+    <li><a href="https://flasher.meshtastic.org" target="_blank">Meshtastic Flasher</a></li>
+    <li><a href="https://client.meshtastic.org" target="_blank">Meshtastic Web Client</a></li>
+    <li><a href="https://meshtastic.org/docs/" target="_blank">Meshtastic dokumentacija</a></li>
+  </ul>
+
+  <h2>Zaključak</h2>
+  <p>Meshtastic nudi jedinstvenu priliku za decentraliziranu, off-grid komunikaciju koja ne ovisi o vanjskoj infrastrukturi. Za korisnike u Hrvatskoj, EU 868 MHz frekvencija pruža optimalne mogućnosti, a aktivna CroMesh zajednica omogućuje razmjenu iskustava i proširenje mreže.</p>
+  
+  <p><a href="index.html">← Natrag na početnu</a></p>
+</body>
+</html>
