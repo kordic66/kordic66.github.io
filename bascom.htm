@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Uvod u programiranje mikrokontrolera programskim jezikom BASCOM">
+    <title>PROGRAMIRANJE MIKROKONTROLERA PROGRAMSKIM JEZIKOM BASCOM</title>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.75;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f9f4;
+            color: #222;
+        }
+        header {
+            background: linear-gradient(135deg, #004d00, #228B22);
+            color: white;
+            text-align: center;
+            padding: 3rem 1rem 2rem;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.1rem;
+        }
+        .container {
+            max-width: 920px;
+            margin: 2rem auto;
+            padding: 2rem 1.8rem;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-radius: 10px;
+        }
+        h2 {
+            color: #006400;
+            border-bottom: 3px solid #90EE90;
+            padding-bottom: 10px;
+            margin-top: 2rem;
+        }
+        p {
+            margin-bottom: 1.3rem;
+            font-size: 1.05rem;
+        }
+        a {
+            color: #006400;
+            text-decoration: underline;
+        }
+        a:hover {
+            color: #004d00;
+        }
+        .next-page {
+            text-align: right;
+            margin: 1.5rem 0 2rem 0;
+            font-size: 1.15rem;
+        }
+        .literatura {
+            background-color: #f0f8f0;
+            padding: 1rem 1.2rem;
+            border-left: 5px solid #228B22;
+            margin: 1.5rem 0;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: #555;
+            font-size: 0.95rem;
+            margin-top: 3rem;
+        }
+        @media (max-width: 600px) {
+            h1 { font-size: 1.75rem; }
+            .container { padding: 1.5rem 1rem; margin: 1rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>PROGRAMIRANJE MIKROKONTROLERA<br>PROGRAMSKIM JEZIKOM BASCOM</h1>
+</header>
+
+<div class="container">
+
+    <div class="next-page">
+        <strong><a href="Programatori/tafe.jpg">→ Next Page</a></strong>
+    </div>
+
+    <h2>UVOD</h2>
+
+    <div class="literatura">
+        <strong>Literatura:</strong> Mr. Vladimir Mitrović, Jurij Mikeln, inž.<br>
+        „PROGRAMIRANJE MIKROKONTROLERA PROGRAMSKIM JEZIKOM BASCOM“, 2002.
+    </div>
+
+    <p>Negdje u jesen 2002. godine imao sam priliku doći u kontakt s ovom knjigom koju smo svi mi zaljubljenici u elektroniku i programiranje jedva dočekali. Do tada smo gutali članke iz časopisa <strong>„Svijet elektronike“</strong>, koji je počeo izlaziti 1998. godine u Hrvatskoj, a početkom 90-ih u Sloveniji.</p>
+
+    <p>Programirati znači uključiti se u zamršeni svijet mikrosklopova, razumjeti kako rade, početi komunikaciju na mikro razini, upaliti i ugasiti LED na nekom od izlaza mikrokontrolera – programski – i biti sretan zbog toga.</p>
+
+    <p>Naravno, to je samo uvod u složenije sklopove koji, ako se malo bolje razmisli, i nisu tako složeni ako stvari promatrate sa programerskog stajališta. Zapravo i najsloženiji sklopovi predstavljaju onu prvu LED-icu koju smo na početku upalili pa ugasili.</p>
+
+    <h2>Dijagram tijeka programa</h2>
+    <p>Od velike pomoći pri programiranju predstavlja najjače oružje svakog programera – <strong>dijagram tijeka programa</strong>. U njemu se definira slijed događaja od inicijalizacije, preko pretprocesorskih naredbi, deklaracija promjenljivih i konstanti, do glavnog programa i potprograma.</p>
+
+    <p>Ovdje ću opisati svoje zabilješke koje sam vodio tijekom eksperimentiranja od 2002. do 2004. godine vezano uz programski jezik Bascom, te predstaviti neke sklopove koje sam ispitao i koji sigurno rade.</p>
+
+    <p>Radi se o popularnom ATMEL-ovom mikrokontroleru <strong>AT89C2051</strong>, koji je zbog niske cijene (oko 12 Kn u Chipoteci) predstavljao pravi izazov za eksperimentiranje. Posebno ako se nabavi univerzalna pločica i malo periferije. Za početak su i obične LED-ice dovoljne za ulazak u svijet mikrokontrolera.</p>
+
+    <p>Programirao sam <a href="Programatori/tafe.jpg">TAFE programatorom</a> kojeg sam sam izradio, a kojeg ću također opisati na ovim stranicama.</p>
+
+    <p>Od 2004. do 2006. godine programirao sam u assembleru i C-u PIC mikrokontrolere, a trenutno me zanima AVR konfiguracija i programiranje višim programskim jezikom C++.</p>
+
+    <p>Želim na jednom mjestu zadržati uspomene na to lijepo razdoblje, a istovremeno obnoviti neke zaboravljene mogućnosti koje Bascom pruža.</p>
+
+    <p><strong>Preporuka:</strong> Svakako posjetite službenu stranicu proizvođača:</p>
+    <p style="text-align:center; font-size:1.1rem;">
+        <a href="https://www.mcselec.com" target="_blank">https://www.mcselec.com</a>
+    </p>
+
+</div>
+
+<footer>
+    © Kodic66 • Zabilješke o programiranju u Bascom-u (2002.–2004.) • Modernizirano 2026.
+</footer>
+
+</body>
+</html>
