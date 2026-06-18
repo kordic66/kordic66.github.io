@@ -20,9 +20,18 @@
     .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
     .item { display: block; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); transition: 0.3s; }
     .item:hover { border-color: var(--primary); transform: scale(1.02); }
-    .item img { width: 100%; display: block; height: 200px; object-fit: contain; background: #111; }
+    .item img { width: 100%; display: block; height: 200px; object-fit: contain; background: #111; cursor: pointer; }
     .caption { padding: 0.75rem 1rem; font-size: 0.85rem; color: var(--text-muted); background: var(--card-bg); }
     footer { text-align: center; padding: 3rem 0; border-top: 1px solid var(--border); color: var(--text-muted); margin-top: 4rem; }
+
+    /* Modal styles */
+    #imageModal {
+        display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+        background: rgba(0,0,0,0.8); align-items: center; justify-content: center; z-index: 9999;
+    }
+    #imageModal img {
+        max-width: 90%; max-height: 90%; border-radius: 8px;
+    }
 </style>
 </head>
 <body>
@@ -138,6 +147,31 @@
         </div>
     </div>
 </div>
+
+<!-- Modal za prikaz slike -->
+<div id="imageModal">
+  <img id="modalImg" src="" alt="Enlarged Image" />
+</div>
+
 <footer>73 de 9A4KJ | <a href="index.html" style="color:var(--primary);text-decoration:none;">Return Home</a></footer>
+
+<script>
+  // Dodavanje funkcionalnosti za prikaz slike u modal
+  const images = document.querySelectorAll('.gallery .item img');
+  const modal = document.getElementById('imageModal');
+  const modalImg = document.getElementById('modalImg');
+
+  images.forEach(img => {
+    img.addEventListener('click', () => {
+      modalImg.src = img.src;
+      modal.style.display = 'flex';
+    });
+  });
+
+  // Klikom na modal ga zatvori
+  document.getElementById('imageModal').addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+</script>
 </body>
 </html>
